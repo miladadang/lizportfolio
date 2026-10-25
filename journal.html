@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Журнал «Искоусъ»</title>
+<script>
+  (function () {
+    var d = document.documentElement;
+    var still = /[?&]static/.test(location.search) ||
+      (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (!still) d.classList.add('anim');
+    setTimeout(function () { d.classList.remove('anim'); }, 3500);
+  })();
+</script>
+<style>
+  :root {
+    --u: calc(100vw / 1280);
+    --font: "HelveticaNeueCyr", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --grey: #585858;
+    --red: #b30f2a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #000; color: #fff; }
+  body { font-family: var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  /* ---------- menu (same as the home page) ---------- */
+  .menu {
+    position: absolute; z-index: 5; left: 0; top: 0; width: 100%;
+    height: max(32px, calc(var(--u) * 40));
+    background: url("assets/menu-bg.png") center / 100% 100% no-repeat;
+  }
+  .menu ul {
+    list-style: none; display: flex; justify-content: space-between;
+    padding: max(11px, calc(var(--u) * 14)) max(16px, calc(var(--u) * 38)) 0;
+  }
+  .menu a {
+    display: block; overflow: hidden; color: #fff; text-decoration: none;
+    font-size: max(10px, calc(var(--u) * 12)); line-height: max(10px, calc(var(--u) * 12));
+    letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
+  }
+  .menu .in { display: block; }
+  .menu .roll { position: relative; display: block; transition: transform .55s cubic-bezier(.19, 1, .22, 1); }
+  .menu .roll::after { content: attr(data-text); position: absolute; left: 0; top: 100%; }
+  .menu a:hover .roll { transform: translateY(-100%); }
+
+  /* ---------- journal block: 1280 x 790 ---------- */
+  .journal {
+    display: grid;
+    grid-template-columns: 650fr 630fr;
+    min-height: calc(var(--u) * 790);
+    background: #000;
+  }
+  .info {
+    position: relative;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: calc(var(--u) * 35);
+    padding: calc(var(--u) * 140) calc(var(--u) * 120) calc(var(--u) * 146);
+    background: #000;
+    text-align: center;
+  }
+  .info > * { width: 100%; }
+
+  .title {
+    font-weight: 400;
+    font-size: calc(var(--u) * 42);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .block {
+    font-size: calc(var(--u) * 18);
+    line-height: 1;
+  }
+  .list { display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 5); text-transform: uppercase; }
+  .label { color: var(--grey); text-transform: uppercase; }
+  .list .label { letter-spacing: 0.02em; }
+  .about { display: flex; flex-direction: column; gap: calc(var(--u) * 6); }
+  .about .text { display: flex; flex-direction: column; gap: calc(var(--u) * 12); }
+  .ln { display: block; }
+
+  /* masked line reveal */
+  .m { display: block; overflow: hidden; }
+  .mi { display: block; will-change: transform; }
+
+  .photo {
+    position: relative; overflow: hidden; background: var(--red);
+  }
+  .photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 1.6s cubic-bezier(.19, 1, .22, 1);
+    will-change: transform;
+  }
+  .photo:hover img { transform: scale(1.035); }
+
+  /* intro initial states (JS hands them to GSAP, then removes .anim) */
+  .anim .mi, .anim .photo img, .anim .photo { visibility: hidden; }
+  .anim .menu .in { visibility: hidden; }
+
+  /* ---------- tablet / mobile ---------- */
+  @media (max-width: 899px) {
+    :root { --u: calc(100vw / 390); }
+    .menu { position: absolute; }
+    .menu ul { padding: 12px 16px 0; gap: 8px; flex-wrap: wrap; }
+    .menu a { font-size: 10px; line-height: 10px; }
+    .journal { grid-template-columns: 1fr; min-height: 0; }
+    .info { padding: 120px 24px 56px; gap: 32px; }
+    .title { font-size: clamp(30px, 10.4vw, 52px); }
+    .block { font-size: clamp(15px, 4.6vw, 20px); }
+    .list { gap: 5px; }
+    .about { gap: 8px; }
+    .about .text { gap: 14px; }
+    .about .ln { display: inline; }
+    .photo { aspect-ratio: 4 / 5; }
+    .photo:hover img { transform: none; }
+  }
+</style>
+</head>
+<body>
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html#about"><span class="in"><span class="roll" data-text="обо мне">обо мне</span></span></a></li>
+      <li><a href="#packaging"><span class="in"><span class="roll" data-text="упаковка &amp; e-com">упаковка &amp; e-com</span></span></a></li>
+      <li><a href="journal.html"><span class="in"><span class="roll" data-text="журнал">журнал</span></span></a></li>
+      <li><a href="#web"><span class="in"><span class="roll" data-text="веб-дизайн">веб-дизайн</span></span></a></li>
+    </ul>
+  </nav>
+
+  <main class="journal">
+    <section class="info">
+      <h1 class="title">
+        <span class="m"><span class="mi">Журнал</span></span>
+        <span class="m"><span class="mi">«Искоусъ»</span></span>
+      </h1>
+
+      <div class="block list">
+        <span class="m"><span class="mi label">Что сделала:</span></span>
+        <span class="m"><span class="mi">модуьную Сетку</span></span>
+        <span class="m"><span class="mi">верстку</span></span>
+        <span class="m"><span class="mi">фотографии</span></span>
+        <span class="m"><span class="mi">интервью</span></span>
+        <span class="m"><span class="mi">препресс</span></span>
+      </div>
+
+      <div class="block about">
+        <span class="m"><span class="mi label">о проекте:</span></span>
+        <div class="text">
+          <p class="m"><span class="mi">Мой дипломный проект</span></p>
+          <p class="m"><span class="mi">«Искоусъ» — журнал, в котором пишут о том, как искусство встраивается в современный мир и о людях, которые его встраивают</span></p>
+          <p class="m"><span class="mi"><span class="ln">Структура журнала состит из слов автора </span><span class="ln">и двух записанных интервью с художником </span><span class="ln">и галлеристом из СПБ</span></span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="photo" aria-label="Журнал «Искоусъ»">
+      <img src="assets/journal-cover.jpg" alt="Журнал «Искоусъ» — стопка номеров и рука, держащая верхний номер" width="1279" height="1700">
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+          onerror="document.documentElement.classList.remove('anim')"></script>
+  <script>
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('anim')) return;
+    if (!window.gsap) { root.classList.remove('anim'); return; }
+
+    var $ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+    var inner = $('.mi'), photo = document.querySelector('.photo'),
+        img = document.querySelector('.photo img'), menuIn = $('.menu .in');
+    var mobile = matchMedia('(max-width: 899px)').matches;
+
+    gsap.set(inner,  { yPercent: 110 });
+    gsap.set(menuIn, { yPercent: 120 });
+    gsap.set(photo,  { clipPath: mobile ? 'inset(0% 0% 100% 0%)' : 'inset(0% 0% 0% 100%)' });
+    gsap.set(img,    { scale: 1.25, transformOrigin: '50% 50%' });
+    root.classList.remove('anim');
+
+    var tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+    tl.to(photo,  { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'expo.inOut' }, 0)
+      .to(img,    { scale: 1, duration: 2.2, ease: 'expo.out', clearProps: 'transform' }, 0.1)
+      .to(menuIn, { yPercent: 0, duration: 1.1, stagger: 0.08 }, 0.2)
+      .to(inner,  { yPercent: 0, duration: 1.3, stagger: 0.07 }, 0.45);
+    setTimeout(function () { tl.progress(1); }, 6000);
+
+  })();
+  </script>
+</body>
+</html>
