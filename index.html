@@ -11,6 +11,7 @@
       (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
     if (!still) d.classList.add('anim');
     d.dataset.still = still ? '1' : '';
+    setTimeout(function () { d.classList.remove('anim'); }, 3500);
   })();
 </script>
 <style>
@@ -155,25 +156,10 @@
   .about a { transition: text-decoration-color .7s ease; }
   .noul .about a { text-decoration-color: transparent; }
 
-  /* ---------- cursor ring ---------- */
-  .ring {
-    position: fixed;
-    z-index: 20;
-    left: 0; top: 0;
-    width: 34px; height: 34px;
-    margin: -17px 0 0 -17px;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    mix-blend-mode: difference;
-    pointer-events: none;
-    opacity: 0;
-  }
-  @media (hover: none), (pointer: coarse) { .ring { display: none; } }
-
   /* ---------- intro initial states (removed by JS once GSAP owns them) ---------- */
-  .anim .line .li { transform: translateY(115%); }
-  .anim .rect { clip-path: inset(100% 0 0 0); }
-  .anim .menu .in { transform: translateY(120%); }
+  .anim .line .li { visibility: hidden; }
+  .anim .rect { visibility: hidden; }
+  .anim .menu .in { visibility: hidden; }
   .anim .about .w { opacity: 0; }
   .anim .bg { opacity: 0; }
 
@@ -232,7 +218,6 @@
       <p class="about" id="about"><a href="#contact">Тут будет описание обо мне и ссылка, чтобы мне написать</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </main>
   </div>
-  <div class="ring" aria-hidden="true"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
           onerror="document.documentElement.classList.remove('anim')"></script>
@@ -263,8 +248,7 @@
     })(about);
 
     var lines = $('.line'), lis = $('.line .li'), rect = document.querySelector('.rect'),
-        ins = $('.menu .in'), words = $('.about .w'), bg = document.querySelector('.bg'),
-        ring = document.querySelector('.ring');
+        ins = $('.menu .in'), words = $('.about .w'), bg = document.querySelector('.bg');
 
     /* hand initial states over from CSS to GSAP */
     gsap.set(lis,  { yPercent: 115, skewY: 7, transformOrigin: '0 100%' });
@@ -282,6 +266,7 @@
       .to(lis,  { yPercent: 0, skewY: 0, duration: 1.5, stagger: 0.13 }, 0.25)
       .to(rect, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut' }, 0.85)
       .to(words,{ opacity: 1, y: 0, duration: 1, stagger: 0.012, ease: 'power3.out' }, 1.3);
+    setTimeout(function () { if (!live) tl.progress(1); }, 6000);
 
     /* ---------- pointer parallax + velocity skew ---------- */
     var depth = [26, -34, 16];          // px of horizontal drift per line (at u=1)
@@ -295,7 +280,6 @@
     });
     document.addEventListener('pointerleave', function () { tx = 0; ty = 0; });
 
-    var rx = 0, ry = 0, rvis = false, hover = false;
     gsap.ticker.add(function (time) {
       var k = 1 - Math.pow(1 - 0.075, gsap.ticker.deltaRatio());
       var vx = tx - cx;
@@ -311,30 +295,12 @@
         var d = Math.sin(time * 0.9);
         gsap.set(rect, { x: d * 10, y: Math.cos(time * 0.7) * 8 });
       }
-      if (ring) {
-        rx += (mx - rx) * Math.min(1, k * 1.9); ry += (my - ry) * Math.min(1, k * 1.9);
-        gsap.set(ring, { x: rx, y: ry });
-      }
     });
 
-    /* ---------- cursor ring ---------- */
-    var mx = innerWidth / 2, my = innerHeight / 2;
-    addEventListener('pointermove', function (e) {
-      if (e.pointerType === 'touch') return;
-      mx = e.clientX; my = e.clientY;
-      if (!rvis) { rvis = true; rx = mx; ry = my; gsap.to(ring, { opacity: 1, duration: .4 }); }
-    });
-    document.addEventListener('pointerleave', function () { rvis = false; gsap.to(ring, { opacity: 0, duration: .3 }); });
-    $('.menu a, .about a').forEach(function (el) {
-      el.addEventListener('pointerenter', function () { gsap.to(ring, { scale: 1.9, duration: .5, ease: 'expo.out' }); });
-      el.addEventListener('pointerleave', function () { gsap.to(ring, { scale: 1, duration: .5, ease: 'expo.out' }); });
-    });
     rect.addEventListener('pointerenter', function () {
-      gsap.to(ring, { scale: 0.35, duration: .4, ease: 'expo.out' });
       gsap.to(rect, { scale: 1.05, duration: .8, ease: 'expo.out' });
     });
     rect.addEventListener('pointerleave', function () {
-      gsap.to(ring, { scale: 1, duration: .4, ease: 'expo.out' });
       gsap.to(rect, { scale: 1, duration: .8, ease: 'expo.out' });
     });
   })();
