@@ -630,6 +630,62 @@
   <p class="jr8-cap">Непрерывная вёрстка создаёт эффект галереи, на&nbsp;стене которой висят картины</p>
 </section>
 
+<style>
+  .jr9 {
+    --u: calc(100vw / 1200);
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 409.8);
+    background: #000;
+  }
+  .jr9 *, .jr9 *::before, .jr9 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .jr9 .jr9-pic { position: absolute; }
+  .jr9 .jr9-pic picture { display: contents; }
+  .jr9 .jr9-pic img { display: block; width: 100%; height: 100%; }
+  .jr9 .a { left: calc(var(--u) * 109.1); top: calc(var(--u) * -1.9); width: calc(var(--u) * 541.1); height: calc(var(--u) * 400.4); }
+  .jr9 .b { left: calc(var(--u) * 605.2); top: calc(var(--u) * -0.5); width: calc(var(--u) * 484.1); height: calc(var(--u) * 400.4); }
+
+  .jr9 .jr9-sq { position: absolute; left: calc(var(--u) * 1129.2); top: calc(var(--u) * 82.2); width: calc(var(--u) * 39.2); height: calc(var(--u) * 39.2); background: #f4ff7b; will-change: transform; }
+
+  @media (max-width: 899px) {
+    .jr9 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8); display: flex; justify-content: space-between; }
+    /* два разворота в ряд: у картинок прозрачные поля, поэтому видимая часть ровно по боковым отступам 23,8, лишнее скрыто */
+    .jr9 .jr9-pic { position: relative; left: auto; top: auto; width: calc(var(--u) * 167.2); height: calc(var(--u) * 139.3); overflow: hidden; }
+    .jr9 .jr9-pic img { position: absolute; height: auto; }
+    .jr9 .a img { left: calc(var(--u) * -24.7); top: calc(var(--u) * -11); width: calc(var(--u) * 215.2); }
+    .jr9 .b img { left: calc(var(--u) * -2.5);  top: calc(var(--u) * -11.1); width: calc(var(--u) * 193.9); }
+    .jr9 .jr9-sq { display: none; }   /* на телефоне квадрата нет */
+  }
+</style>
+<!-- ЖУРНАЛ «ИСКОУСЪ» · ДЕВЯТЫЙ БЛОК: «БЛИЦ» -->
+<section class="jr9" id="jr9">
+  <div class="jr9-pic a"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3335-6163-4639-b061-316563326430/-/format/webp/91.png.webp"><img src="https://static.tildacdn.pub/tila3335-6163-4639-b061-316563326430/91.png" alt="Разворот журнала, рубрика «Блиц»: ответы художника и рисунок пастелью — белый кот" width="1292" height="956"></picture></div>
+  <div class="jr9-pic b"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3435-6339-4439-b235-346564353130/-/format/webp/92.png.webp"><img src="https://static.tildacdn.pub/tila3435-6339-4439-b235-346564353130/92.png" alt="Разворот журнала, рубрика «Блиц»: ответы художника и абстрактная картина" width="1156" height="956"></picture></div>
+  <div class="jr9-sq" id="jr9Sq" aria-hidden="true"></div>
+</section>
+<script>
+/* ДЕВЯТЫЙ БЛОК · жёлтый квадрат плавно едет вверх/вниз при прокрутке (на телефоне скрыт) */
+(function () {
+  var sec = document.getElementById('jr9'), sq = document.getElementById('jr9Sq');
+  if (!sec || !sq || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var target = 0, cur = 0, running = false;
+  function progress() {
+    var b = sec.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
+    return Math.max(0, Math.min(1, (vh - b.top) / (vh + b.height)));   /* 0 — блок появился снизу, 1 — ушёл вверх */
+  }
+  function render() { sq.style.transform = 'translate3d(0,' + ((cur - 0.5) * 2 * 46).toFixed(2) + 'px,0)'; }  /* 0 — когда блок по центру экрана */
+  function tick() {
+    cur += (target - cur) * 0.14;
+    if (Math.abs(target - cur) < 0.0004) { cur = target; running = false; render(); return; }
+    render(); requestAnimationFrame(tick);
+  }
+  function onScroll() { target = progress(); if (!running) { running = true; requestAnimationFrame(tick); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  cur = target = progress(); render();
+})();
+</script>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
