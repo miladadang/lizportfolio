@@ -89,26 +89,47 @@
   .lz-hero .lz-nb { white-space: nowrap; }
 
   .lz-hero .lz-titlebox { display: contents; }
+  .lz-hero .lz-menu-m, .lz-hero .lz-drawer, .lz-hero .lz-backdrop { display: none; }
 
   /* ---------- mobile ---------- */
   @media (max-width: 767px) {
     .lz-hero { height: auto; min-height: 100svh; overflow: hidden; --m: 16vw; }
-    .lz-hero .lz-menu { height: auto; padding-bottom: 12px; }
-    .lz-hero .lz-menu ul { padding: 12px 16px 0; gap: 6px 14px; flex-wrap: wrap; }
-    .lz-hero .lz-menu a { font-size: 10px; line-height: 10px; }
+    .lz-hero .lz-menu { height: 42px; }
+    .lz-hero .lz-menu .lz-menu-d { display: none; }
+    .lz-hero .lz-menu-m { display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 16px 0; }
+    .lz-hero .lz-menu-m a, .lz-hero .lz-toggle {
+      appearance: none; background: none; border: 0; cursor: pointer; color: #fff; text-decoration: none;
+      font: 400 12px/12px var(--lz-text); letter-spacing: .02em; text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .lz-hero .lz-backdrop { display: block; position: fixed; inset: 0; z-index: 17; opacity: 0; visibility: hidden; }
+    .lz-hero.is-open .lz-backdrop { visibility: visible; }
+    .lz-hero .lz-drawer {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 22px;
+      position: fixed; z-index: 18; top: 0; right: 0; width: 50vw; height: 100svh;
+      padding: 64px 16px 24px; background: #000; text-align: right;
+      transform: translateX(100%); visibility: hidden;
+      transition: transform .5s cubic-bezier(.19,1,.22,1), visibility 0s linear .5s;
+    }
+    .lz-hero.is-open .lz-drawer { transform: none; visibility: visible; transition-delay: 0s; }
+    .lz-hero .lz-proj {
+      color: #fff; text-decoration: none; font: 400 12px/14px var(--lz-text); letter-spacing: .02em; text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .lz-hero .lz-proj.is-on { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
     .lz-hero .lz-stage {
       position: relative; left: auto; top: auto; transform: none;
-      width: 100%; height: auto; min-height: 100svh; padding: 88px 16px 48px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 100%; height: auto; min-height: 100svh; padding: 64px 16px max(24px, env(safe-area-inset-bottom));
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
     }
     .lz-hero .lz-title { position: relative; inset: auto; width: 100%; font-size: var(--m); line-height: .96; }
     .lz-hero .lz-title span { position: relative; top: auto !important; }
     .lz-hero .lz-photo {
       left: 50%; top: 16.9%; margin-left: -.72em; width: 1.44em; height: 1.78em; font-size: var(--m);
     }
-    .lz-hero .lz-titlebox { display: block; position: relative; width: 100%; }
+    .lz-hero .lz-titlebox { display: block; position: relative; width: 100%; margin: auto 0; padding: 24px 0; }
     .lz-hero .lz-intro, .lz-hero .lz-contact { position: relative; left: auto; top: auto; width: 100%; font-size: 14px; line-height: 1.28; }
-    .lz-hero .lz-intro { margin-top: 44px; text-wrap: pretty; }
+    .lz-hero .lz-intro { margin-top: 0; text-wrap: pretty; }
     .lz-hero .lz-contact { margin-top: 22px; white-space: normal; text-wrap: balance; }
   }
 </style>
@@ -117,14 +138,24 @@
 <div class="lz-hero">
   <div class="lz-bg"></div>
 
-  <nav class="lz-menu">
-    <ul>
+  <nav class="lz-menu" aria-label="Главное меню">
+    <ul class="lz-menu-d">
       <li><a href="#about"><span class="roll" data-text="обо мне">обо мне</span></a></li>
       <li><a href="#web"><span class="roll" data-text="веб-дизайн">веб-дизайн</span></a></li>
       <li><a href="#packaging"><span class="roll" data-text="упаковка &amp; e-com">упаковка &amp; e-com</span></a></li>
       <li><a href="journal.html"><span class="roll" data-text="журнал">журнал</span></a></li>
     </ul>
+    <div class="lz-menu-m">
+      <a href="#about">обо мне</a>
+      <button type="button" class="lz-toggle" id="lzToggle" aria-expanded="false" aria-controls="lzDrawer">проекты</button>
+    </div>
   </nav>
+  <div class="lz-backdrop" id="lzBackdrop"></div>
+  <aside class="lz-drawer" id="lzDrawer" aria-label="Проекты" aria-hidden="true">
+    <a href="#web" class="lz-proj">веб-дизайн</a>
+    <a href="#packaging" class="lz-proj">упаковка &amp; e-com</a>
+    <a href="journal.html" class="lz-proj">журнал</a>
+  </aside>
 
   <main class="lz-stage" id="about">
     <div class="lz-titlebox">
@@ -141,6 +172,28 @@
 </div>
 
 <script>
+(function () {
+  var hero = document.querySelector('.lz-hero'), toggle = document.getElementById('lzToggle'),
+      drawer = document.getElementById('lzDrawer'), back = document.getElementById('lzBackdrop');
+  if (!toggle) return;
+  function setOpen(v) {
+    hero.classList.toggle('is-open', v);
+    toggle.setAttribute('aria-expanded', v ? 'true' : 'false');
+    drawer.setAttribute('aria-hidden', v ? 'false' : 'true');
+  }
+  toggle.addEventListener('click', function () { setOpen(!hero.classList.contains('is-open')); });
+  back.addEventListener('click', function () { setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  Array.prototype.forEach.call(drawer.querySelectorAll('.lz-proj'), function (a) {
+    a.addEventListener('click', function (e) {
+      Array.prototype.forEach.call(drawer.querySelectorAll('.lz-proj'), function (x) { x.classList.remove('is-on'); });
+      a.classList.add('is-on');
+      var href = a.getAttribute('href');
+      if (href.charAt(0) !== '#') { e.preventDefault(); setTimeout(function () { location.href = href; }, 320); }
+      else { setTimeout(function () { setOpen(false); }, 380); }
+    });
+  });
+})();
 (function () {
   var photo = document.getElementById('lzPhoto');
   if (!photo || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
