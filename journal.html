@@ -43,6 +43,8 @@
   .menu .roll::after { content: attr(data-text); position: absolute; left: 0; top: 100%; }
   .menu a:hover .roll { transform: translateY(-100%); }
 
+  .menu-m, .drawer, .backdrop { display: none; }
+
   /* ---------- journal block: 1280 x 790 ---------- */
   .journal {
     display: grid;
@@ -100,11 +102,32 @@
   /* ---------- tablet / mobile ---------- */
   @media (max-width: 899px) {
     :root { --u: calc(100vw / 390); }
-    .menu { position: absolute; }
-    .menu ul { padding: 12px 16px 0; gap: 8px; flex-wrap: wrap; }
-    .menu a { font-size: 10px; line-height: 10px; }
+    .menu { position: fixed; z-index: 20; height: 42px; background: url("assets/menu-gradient.png") center / 100% 100% no-repeat; }
+    .menu .menu-d { display: none; }
+    .menu-m { display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 16px 0; }
+    .menu-m a, .toggle {
+      appearance: none; background: none; border: 0; cursor: pointer; color: #fff; text-decoration: none;
+      font: 400 12px/12px var(--font); letter-spacing: .02em; text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .backdrop { display: block; position: fixed; inset: 0; z-index: 17; visibility: hidden; }
+    body.is-open .backdrop { visibility: visible; }
+    .drawer {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 22px;
+      position: fixed; z-index: 18; top: 0; right: 0; width: 50vw; height: 100svh;
+      padding: 64px 16px 24px; background: #000; text-align: right;
+      transform: translateX(100%); visibility: hidden;
+      transition: transform .5s cubic-bezier(.19,1,.22,1), visibility 0s linear .5s;
+    }
+    body.is-open .drawer { transform: none; visibility: visible; transition-delay: 0s; }
+    .proj {
+      color: #fff; text-decoration: none; font: 400 12px/14px var(--font); letter-spacing: .02em; text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .proj.is-on { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+    .photo { order: -1; }
     .journal { grid-template-columns: 1fr; min-height: 0; }
-    .info { padding: 120px 24px 56px; gap: 32px; }
+    .info { padding: 56px 24px 56px; gap: 32px; }
     .title { font-size: clamp(30px, 10.4vw, 52px); }
     .block { font-size: clamp(15px, 4.6vw, 20px); }
     .list { gap: 5px; }
@@ -117,14 +140,24 @@
 </style>
 </head>
 <body>
-  <nav class="menu">
-    <ul>
+  <nav class="menu" aria-label="Главное меню">
+    <ul class="menu-d">
       <li><a href="index.html#about"><span class="in"><span class="roll" data-text="обо мне">обо мне</span></span></a></li>
+      <li><a href="#web"><span class="in"><span class="roll" data-text="веб-дизайн">веб-дизайн</span></span></a></li>
       <li><a href="#packaging"><span class="in"><span class="roll" data-text="упаковка &amp; e-com">упаковка &amp; e-com</span></span></a></li>
       <li><a href="journal.html"><span class="in"><span class="roll" data-text="журнал">журнал</span></span></a></li>
-      <li><a href="#web"><span class="in"><span class="roll" data-text="веб-дизайн">веб-дизайн</span></span></a></li>
     </ul>
+    <div class="menu-m">
+      <a href="index.html#about">обо мне</a>
+      <button type="button" class="toggle" id="toggle" aria-expanded="false" aria-controls="drawer">проекты</button>
+    </div>
   </nav>
+  <div class="backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer" aria-label="Проекты" aria-hidden="true">
+    <a href="#web" class="proj">веб-дизайн</a>
+    <a href="#packaging" class="proj">упаковка &amp; e-com</a>
+    <a href="journal.html" class="proj is-on">журнал</a>
+  </aside>
 
   <main class="journal">
     <section class="info">
@@ -135,7 +168,7 @@
 
       <div class="block list">
         <span class="m"><span class="mi label">Что сделала:</span></span>
-        <span class="m"><span class="mi">модуьную Сетку</span></span>
+        <span class="m"><span class="mi">модульную сетку</span></span>
         <span class="m"><span class="mi">верстку</span></span>
         <span class="m"><span class="mi">фотографии</span></span>
         <span class="m"><span class="mi">интервью</span></span>
@@ -159,6 +192,31 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
           onerror="document.documentElement.classList.remove('anim')"></script>
+  <script>
+  (function () {
+    var toggle = document.getElementById('toggle'), drawer = document.getElementById('drawer'),
+        back = document.getElementById('backdrop'), body = document.body;
+    function setOpen(v) {
+      body.classList.toggle('is-open', v);
+      toggle.setAttribute('aria-expanded', v ? 'true' : 'false');
+      drawer.setAttribute('aria-hidden', v ? 'false' : 'true');
+    }
+    toggle.addEventListener('click', function () { setOpen(!body.classList.contains('is-open')); });
+    back.addEventListener('click', function () { setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+    var projs = Array.prototype.slice.call(drawer.querySelectorAll('.proj'));
+    projs.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        projs.forEach(function (x) { x.classList.remove('is-on'); });
+        a.classList.add('is-on');
+        var href = a.getAttribute('href');
+        if (href.indexOf('journal.html') === 0) { e.preventDefault(); setTimeout(function () { setOpen(false); }, 300); }
+        else if (href.charAt(0) !== '#') { e.preventDefault(); setTimeout(function () { location.href = href; }, 320); }
+        else { setTimeout(function () { setOpen(false); }, 380); }
+      });
+    });
+  })();
+  </script>
   <script>
   (function () {
     var root = document.documentElement;
