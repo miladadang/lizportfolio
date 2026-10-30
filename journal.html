@@ -4,244 +4,196 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Журнал «Искоусъ»</title>
-<script>
-  (function () {
-    var d = document.documentElement;
-    var still = /[?&]static/.test(location.search) ||
-      (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-    if (!still) d.classList.add('anim');
-    setTimeout(function () { d.classList.remove('anim'); }, 3500);
-  })();
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --u: calc(100vw / 1280);
-    --font: "HelveticaNeueCyr", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  html, body { margin: 0; background: #000; }
+  .jr {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
     --grey: #585858;
-    --red: #b30f2a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: #000; color: #fff; }
-  body { font-family: var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-
-  /* ---------- menu (same as the home page) ---------- */
-  .menu {
-    position: absolute; z-index: 5; left: 0; top: 0; width: 100%;
-    height: max(32px, calc(var(--u) * 40));
-  }
-  .menu ul {
-    list-style: none; display: flex; justify-content: space-between;
-    padding: max(11px, calc(var(--u) * 14)) max(16px, calc(var(--u) * 38)) 0;
-  }
-  .menu a {
-    display: block; overflow: hidden; color: #fff; text-decoration: none;
-    font-size: max(10px, calc(var(--u) * 12)); line-height: max(10px, calc(var(--u) * 12));
-    letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
-  }
-  .menu .in { display: block; }
-  .menu .roll { position: relative; display: block; transition: transform .55s cubic-bezier(.19, 1, .22, 1); }
-  .menu .roll::after { content: attr(data-text); position: absolute; left: 0; top: 100%; }
-  .menu a:hover .roll { transform: translateY(-100%); }
-
-  .menu-m, .drawer, .backdrop { display: none; }
-
-  /* ---------- journal block: 1280 x 790 ---------- */
-  .journal {
-    display: grid;
-    grid-template-columns: 650fr 630fr;
-    min-height: calc(var(--u) * 790);
-    background: #000;
-  }
-  .info {
     position: relative;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    gap: calc(var(--u) * 35);
-    padding: calc(var(--u) * 140) calc(var(--u) * 120) calc(var(--u) * 146);
     background: #000;
+    color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+  .jr *, .jr *::before, .jr *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ---------- menu: fixed to the top, same as the home page ---------- */
+  .jr .jr-menu {
+    position: fixed; z-index: 20; left: 0; top: 0; width: 100%;
+    height: max(32px, calc(var(--u) * 34.26));
+  }
+  .jr .jr-menu-d {
+    list-style: none; display: flex; justify-content: space-between;
+    padding: max(10px, calc(var(--u) * 12)) max(16px, calc(var(--u) * 85.65)) 0;
+  }
+  .jr .jr-menu-d a {
+    position: relative; display: block; color: #fff; text-decoration: none; white-space: nowrap;
+    font: 400 max(10px, calc(var(--u) * 12))/max(10px, calc(var(--u) * 12)) var(--jr-font);
+    letter-spacing: .02em; text-transform: uppercase;
+  }
+  .jr .jr-menu-d a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: #fff;
+    transform: scaleX(0); transform-origin: right center;
+    transition: transform .5s cubic-bezier(.19,1,.22,1);
+  }
+  .jr .jr-menu-d a:hover::after, .jr .jr-menu-d a:focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+  .jr .jr-menu-m, .jr .jr-drawer, .jr .jr-backdrop { display: none; }
+
+  /* ---------- journal block: 1200 x 583 ---------- */
+  .jr .jr-block {
+    display: grid;
+    grid-template-columns: 608fr 592fr;
+    min-height: calc(var(--u) * 583);
+    background: #000;
+  }
+  .jr .jr-info {
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: calc(var(--u) * 30);
+    padding: calc(var(--u) * 60) calc(var(--u) * 129);
     text-align: center;
   }
-  .info > * { width: 100%; }
-
-  .title {
-    font-weight: 400;
-    font-size: calc(var(--u) * 42);
-    line-height: 1;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+  .jr .jr-info > * { width: 100%; }
+  .jr .jr-title {
+    font-weight: 400; font-size: calc(var(--u) * 36); line-height: 1;
+    letter-spacing: .02em; text-transform: uppercase;
   }
-  .block {
-    font-size: calc(var(--u) * 18);
-    line-height: 1;
-  }
-  .list { display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 5); text-transform: uppercase; }
-  .label { color: var(--grey); text-transform: uppercase; }
-  .list .label { letter-spacing: 0.02em; }
-  .about { display: flex; flex-direction: column; gap: calc(var(--u) * 6); }
-  .about .text { display: flex; flex-direction: column; gap: calc(var(--u) * 12); }
-  .ln { display: block; }
+  .jr .jr-title span { display: block; }
+  .jr .jr-text { font-size: calc(var(--u) * 14); line-height: 1; }
+  .jr .jr-list { display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 5); text-transform: uppercase; }
+  .jr .jr-label { color: var(--grey); text-transform: uppercase; letter-spacing: .02em; }
+  .jr .jr-about { display: flex; flex-direction: column; gap: calc(var(--u) * 6); }
+  .jr .jr-about .jr-body { display: flex; flex-direction: column; gap: calc(var(--u) * 10); }
+  .jr .jr-ln { display: block; }
+  .jr .jr-mb { display: inline; }
 
-  /* masked line reveal */
-  .m { display: block; overflow: hidden; }
-  .mi { display: block; will-change: transform; }
-
-  .photo {
-    position: relative; overflow: hidden; background: var(--red);
-  }
-  .photo img {
+  /* photo: grows smoothly inside its frame on hover */
+  .jr .jr-photo { position: relative; overflow: hidden; background: #b30f2a; }
+  .jr .jr-photo img {
     position: absolute; inset: 0; width: 100%; height: 100%;
     object-fit: cover; display: block;
-    transition: transform 1.6s cubic-bezier(.19, 1, .22, 1);
+    transition: transform 1.6s cubic-bezier(.19,1,.22,1);
     will-change: transform;
   }
-  .photo:hover img { transform: scale(1.035); }
-
-  /* intro initial states (JS hands them to GSAP, then removes .anim) */
-  .anim .mi, .anim .photo img, .anim .photo { visibility: hidden; }
-  .anim .menu .in { visibility: hidden; }
+  .jr .jr-photo:hover img { transform: scale(1.06); }
 
   /* ---------- tablet / mobile ---------- */
   @media (max-width: 899px) {
-    :root { --u: calc(100vw / 390); }
-    .menu { position: fixed; z-index: 20; height: 44px; background: url("assets/menu-gradient.png") center / 100% 100% no-repeat; }
-    .menu .menu-d { display: none; }
-    .menu-m { display: flex; justify-content: space-between; align-items: flex-start; padding: 15px 16px 0; }
-    .menu-m a, .toggle {
+    .jr { --u: calc(100vw / 390); }
+    .jr .jr-menu { height: 44px; background: url("assets/menu-gradient.png") center / 100% 100% no-repeat; }
+    .jr .jr-menu-d { display: none; }
+    .jr .jr-menu-m { display: flex; justify-content: space-between; align-items: flex-start; padding: 15px 16px 0; }
+    .jr .jr-menu-m a, .jr .jr-toggle {
       appearance: none; background: none; border: 0; cursor: pointer; color: #fff; text-decoration: none;
-      font: 400 14px/14px var(--font); letter-spacing: .02em; text-transform: uppercase;
+      font: 400 14px/14px var(--jr-font); letter-spacing: .02em; text-transform: uppercase;
       -webkit-tap-highlight-color: transparent;
     }
-    .backdrop { display: block; position: fixed; inset: 0; z-index: 17; visibility: hidden; }
-    body.is-open .backdrop { visibility: visible; }
-    .drawer {
+    .jr .jr-backdrop { display: block; position: fixed; inset: 0; z-index: 17; visibility: hidden; }
+    .jr.is-open .jr-backdrop { visibility: visible; }
+    .jr .jr-drawer {
       display: flex; flex-direction: column; align-items: flex-end; gap: 22px;
       position: fixed; z-index: 18; top: 0; right: 0; width: 50vw; height: 100svh;
       padding: 64px 16px 24px; background: #000; text-align: right;
       transform: translateX(100%); visibility: hidden;
       transition: transform .5s cubic-bezier(.19,1,.22,1), visibility 0s linear .5s;
     }
-    body.is-open .drawer { transform: none; visibility: visible; transition-delay: 0s; }
-    .proj {
-      color: #fff; text-decoration: none; font: 400 14px/16px var(--font); letter-spacing: .02em; text-transform: uppercase;
+    .jr.is-open .jr-drawer { transform: none; visibility: visible; transition-delay: 0s; }
+    .jr .jr-proj {
+      color: #fff; text-decoration: none; font: 400 14px/16px var(--jr-font); letter-spacing: .02em; text-transform: uppercase;
       -webkit-tap-highlight-color: transparent;
     }
-    .proj.is-on { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-    .photo { order: -1; }
-    .journal { grid-template-columns: 1fr; min-height: 0; }
-    .info { padding: 56px 24px 56px; gap: 32px; }
-    .title { font-size: clamp(30px, 10.4vw, 52px); }
-    .block { font-size: clamp(15px, 4.6vw, 20px); }
-    .list { gap: 5px; }
-    .about { gap: 8px; }
-    .about .text { gap: 14px; }
-    .about .ln { display: inline; }
-    .photo { aspect-ratio: 4 / 5; }
-    .photo:hover img { transform: none; }
+    .jr .jr-proj.is-on { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+
+    .jr .jr-block { grid-template-columns: 1fr; min-height: 0; }
+    .jr .jr-photo { order: -1; aspect-ratio: 689 / 892; }
+    .jr .jr-photo:hover img { transform: none; }
+    .jr .jr-info { padding: 56px 20px 72px; gap: 32px; }
+    .jr .jr-title { font-size: clamp(32px, 11vw, 54px); }
+    .jr .jr-text { font-size: clamp(15px, 4.7vw, 22px); line-height: 1.02; }
+    .jr .jr-list { gap: 6px; }
+    .jr .jr-about { gap: 10px; }
+    .jr .jr-about .jr-body { gap: 18px; }
+    .jr .jr-mb { display: block; }
+    .jr .jr-body p:first-child .jr-ln { display: inline; }
   }
 </style>
 </head>
 <body>
-  <nav class="menu" aria-label="Главное меню">
-    <ul class="menu-d">
-      <li><a href="index.html#about"><span class="in"><span class="roll" data-text="обо мне">обо мне</span></span></a></li>
-      <li><a href="#web"><span class="in"><span class="roll" data-text="веб-дизайн">веб-дизайн</span></span></a></li>
-      <li><a href="#packaging"><span class="in"><span class="roll" data-text="упаковка &amp; e-com">упаковка &amp; e-com</span></span></a></li>
-      <li><a href="journal.html"><span class="in"><span class="roll" data-text="журнал">журнал</span></span></a></li>
+<!-- ЖУРНАЛ «ИСКОУСЪ» · ПЕРВЫЙ БЛОК -->
+<div class="jr" id="jr">
+  <nav class="jr-menu" aria-label="Главное меню">
+    <ul class="jr-menu-d">
+      <li><a href="main.html">обо мне</a></li>
+      <li><a href="#web">веб-дизайн</a></li>
+      <li><a href="#packaging">упаковка &amp; e-com</a></li>
+      <li><a href="journal.html">журнал</a></li>
     </ul>
-    <div class="menu-m">
-      <a href="index.html#about">обо мне</a>
-      <button type="button" class="toggle" id="toggle" aria-expanded="false" aria-controls="drawer">проекты</button>
+    <div class="jr-menu-m">
+      <a href="main.html">обо мне</a>
+      <button type="button" class="jr-toggle" id="jrToggle" aria-expanded="false" aria-controls="jrDrawer">проекты</button>
     </div>
   </nav>
-  <div class="backdrop" id="backdrop"></div>
-  <aside class="drawer" id="drawer" aria-label="Проекты" aria-hidden="true">
-    <a href="#web" class="proj">веб-дизайн</a>
-    <a href="#packaging" class="proj">упаковка &amp; e-com</a>
-    <a href="journal.html" class="proj is-on">журнал</a>
+  <div class="jr-backdrop" id="jrBackdrop"></div>
+  <aside class="jr-drawer" id="jrDrawer" aria-label="Проекты" aria-hidden="true">
+    <a href="#web" class="jr-proj">веб-дизайн</a>
+    <a href="#packaging" class="jr-proj">упаковка &amp; e-com</a>
+    <a href="journal.html" class="jr-proj is-on">журнал</a>
   </aside>
 
-  <main class="journal">
-    <section class="info">
-      <h1 class="title">
-        <span class="m"><span class="mi">Журнал</span></span>
-        <span class="m"><span class="mi">«Искоусъ»</span></span>
-      </h1>
+  <main class="jr-block">
+    <section class="jr-info">
+      <h1 class="jr-title"><span>Журнал</span><span>«Искоусъ»</span></h1>
 
-      <div class="block list">
-        <span class="m"><span class="mi label">Что сделала:</span></span>
-        <span class="m"><span class="mi">модульную сетку</span></span>
-        <span class="m"><span class="mi">верстку</span></span>
-        <span class="m"><span class="mi">фотографии</span></span>
-        <span class="m"><span class="mi">интервью</span></span>
-        <span class="m"><span class="mi">препресс</span></span>
+      <div class="jr-text jr-list">
+        <span class="jr-label">Что сделала:</span>
+        <span>концепцию</span>
+        <span>модульную сетку</span>
+        <span>верстку</span>
+        <span>фотографии</span>
+        <span>препресс</span>
       </div>
 
-      <div class="block about">
-        <span class="m"><span class="mi label">о проекте:</span></span>
-        <div class="text">
-          <p class="m"><span class="mi">Мой дипломный проект</span></p>
-          <p class="m"><span class="mi">«Искоусъ» — журнал, в котором пишут о том, как искусство встраивается в современный мир и о людях, которые его встраивают</span></p>
-          <p class="m"><span class="mi"><span class="ln">Структура журнала состит из слов автора </span><span class="ln">и двух записанных интервью с художником </span><span class="ln">и галлеристом из СПБ</span></span></p>
+      <div class="jr-text jr-about">
+        <span class="jr-label">о проекте:</span>
+        <div class="jr-body">
+          <p><span class="jr-ln">«Искоусъ»&nbsp;— журнал, в&nbsp;котором пишут о&nbsp;том, как </span><span class="jr-ln">искусство встраивается в&nbsp;современный мир и&nbsp;о&nbsp;людях, </span><span class="jr-ln">которые его встраивают</span></p>
+          <p><span class="jr-ln">Структура журнала состит из&nbsp;слов автора</span><span class="jr-ln">и&nbsp;двух записанных интервью <span class="jr-mb">с&nbsp;художником</span></span><span class="jr-ln">и&nbsp;галлеристом из&nbsp;СПБ</span></p>
         </div>
       </div>
     </section>
 
-    <section class="photo" aria-label="Журнал «Искоусъ»">
+    <section class="jr-photo" aria-label="Журнал «Искоусъ»">
       <img src="assets/journal-cover.jpg" alt="Журнал «Искоусъ» — стопка номеров и рука, держащая верхний номер" width="1279" height="1700">
     </section>
   </main>
+</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-          onerror="document.documentElement.classList.remove('anim')"></script>
-  <script>
-  (function () {
-    var toggle = document.getElementById('toggle'), drawer = document.getElementById('drawer'),
-        back = document.getElementById('backdrop'), body = document.body;
-    function setOpen(v) {
-      body.classList.toggle('is-open', v);
-      toggle.setAttribute('aria-expanded', v ? 'true' : 'false');
-      drawer.setAttribute('aria-hidden', v ? 'false' : 'true');
-    }
-    toggle.addEventListener('click', function () { setOpen(!body.classList.contains('is-open')); });
-    back.addEventListener('click', function () { setOpen(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
-    var projs = Array.prototype.slice.call(drawer.querySelectorAll('.proj'));
-    projs.forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        projs.forEach(function (x) { x.classList.remove('is-on'); });
-        a.classList.add('is-on');
-        var href = a.getAttribute('href');
-        if (href.indexOf('journal.html') === 0) { e.preventDefault(); setTimeout(function () { setOpen(false); }, 300); }
-        else if (href.charAt(0) !== '#') { e.preventDefault(); setTimeout(function () { location.href = href; }, 320); }
-        else { setTimeout(function () { setOpen(false); }, 380); }
-      });
+<script>
+(function () {
+  var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
+      drawer = document.getElementById('jrDrawer'), back = document.getElementById('jrBackdrop');
+  if (!toggle) return;
+  function setOpen(v) {
+    root.classList.toggle('is-open', v);
+    toggle.setAttribute('aria-expanded', v ? 'true' : 'false');
+    drawer.setAttribute('aria-hidden', v ? 'false' : 'true');
+  }
+  toggle.addEventListener('click', function () { setOpen(!root.classList.contains('is-open')); });
+  back.addEventListener('click', function () { setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  var projs = Array.prototype.slice.call(drawer.querySelectorAll('.jr-proj'));
+  projs.forEach(function (a) {
+    a.addEventListener('click', function () {
+      projs.forEach(function (x) { x.classList.remove('is-on'); });
+      a.classList.add('is-on');
+      setTimeout(function () { setOpen(false); }, 380);
     });
-  })();
-  </script>
-  <script>
-  (function () {
-    var root = document.documentElement;
-    if (!root.classList.contains('anim')) return;
-    if (!window.gsap) { root.classList.remove('anim'); return; }
-
-    var $ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
-    var inner = $('.mi'), photo = document.querySelector('.photo'),
-        img = document.querySelector('.photo img'), menuIn = $('.menu .in');
-    var mobile = matchMedia('(max-width: 899px)').matches;
-
-    gsap.set(inner,  { yPercent: 110 });
-    gsap.set(menuIn, { yPercent: 120 });
-    gsap.set(photo,  { clipPath: mobile ? 'inset(0% 0% 100% 0%)' : 'inset(0% 0% 0% 100%)' });
-    gsap.set(img,    { scale: 1.25, transformOrigin: '50% 50%' });
-    root.classList.remove('anim');
-
-    var tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-    tl.to(photo,  { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'expo.inOut' }, 0)
-      .to(img,    { scale: 1, duration: 2.2, ease: 'expo.out', clearProps: 'transform' }, 0.1)
-      .to(menuIn, { yPercent: 0, duration: 1.1, stagger: 0.08 }, 0.2)
-      .to(inner,  { yPercent: 0, duration: 1.3, stagger: 0.07 }, 0.45);
-    setTimeout(function () { tl.progress(1); }, 6000);
-
-  })();
-  </script>
+  });
+})();
+</script>
 </body>
 </html>
