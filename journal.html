@@ -231,6 +231,7 @@
   .jr3 { position: relative; overflow: hidden; background: #000; color: #fff; line-height: 0; }
   .jr3 *, .jr3 *::before, .jr3 *::after { box-sizing: border-box; margin: 0; padding: 0; }
   .jr3 .jr3-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+  .jr3 svg { overflow: visible; }
   .jr3 .t { fill: #585858; }
   .jr3 .y { fill: #f4ff7b; }
   .jr3 .jr3-desk { display: block; width: 100%; height: auto; }
@@ -241,9 +242,9 @@
     .jr3 .jr3-row { margin-bottom: 30px; }
     .jr3 .jr3-row:last-child { margin-bottom: 0; }
     .jr3 .jr3-name { display: block; width: 100%; height: auto; }
-    .jr3 .jr3-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding: 0 2px; min-height: 20px; }
-    .jr3 .jr3-lab { display: block; height: 16px; width: auto; }
-    .jr3 .jr3-smp { display: block; height: 18px; width: auto; }
+    .jr3 .jr3-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding: 0 4px; min-height: 18px; }
+    .jr3 .jr3-lab { display: block; height: 13px; width: auto; }
+    .jr3 .jr3-smp { display: block; height: 15px; width: auto; }
   }
 </style>
 <!-- ЖУРНАЛ «ИСКОУСЪ» · ТРЕТИЙ БЛОК: ШРИФТЫ ПРОЕКТА (текст в кривых, шрифты не подключаются) -->
@@ -252,6 +253,42 @@
 <svg class="jr3-desk" viewBox="0 0 1200 529" role="img" aria-label="Шрифты проекта: Inter Bold — заголовки; Charter C — основной текст; Departura — подписи; Wremena — колонтитулы; Singfried-01 — шмуцтитулы"><use href="#jr3-p0" class="t"/><use href="#jr3-p1" class="t"/><use href="#jr3-p2" class="t"/><use href="#jr3-p3" class="t"/><use href="#jr3-p4" class="t"/><use href="#jr3-p5" class="t"/><use href="#jr3-p6" class="t"/><use href="#jr3-p7" class="t"/><use href="#jr3-p8" class="t"/><use href="#jr3-p9" class="t"/><use href="#jr3-p10" class="t"/><use href="#jr3-p11" class="t"/><use href="#jr3-p12" class="t"/><use href="#jr3-s0" class="y"/><use href="#jr3-s1" class="y"/></svg>
 <div class="jr3-mob"><div class="jr3-row"><svg class="jr3-name" viewBox="80 42 430 64" aria-hidden="true"><use href="#jr3-p5" class="t"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 94 72 16" aria-hidden="true"><use href="#jr3-p0" class="t"/></svg></div></div><div class="jr3-row"><svg class="jr3-name" viewBox="80 122 430 68" aria-hidden="true"><use href="#jr3-p6" class="t"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 177 107 16" aria-hidden="true"><use href="#jr3-p1" class="t"/></svg><svg class="jr3-smp" viewBox="956 179 112 21" aria-hidden="true"><use href="#jr3-p10" class="t"/></svg></div></div><div class="jr3-row"><svg class="jr3-name" viewBox="80 220 430 82" aria-hidden="true"><use href="#jr3-p7" class="t"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 260 60 18" aria-hidden="true"><use href="#jr3-p2" class="t"/></svg><svg class="jr3-smp" viewBox="956 259 95 23" aria-hidden="true"><use href="#jr3-p11" class="t"/></svg></div></div><div class="jr3-row"><svg class="jr3-name" viewBox="80 298 430 66" aria-hidden="true"><use href="#jr3-p8" class="t"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 342 88 18" aria-hidden="true"><use href="#jr3-p3" class="t"/></svg><svg class="jr3-smp" viewBox="956 337 152 21" aria-hidden="true"><use href="#jr3-p12" class="t"/></svg></div></div><div class="jr3-row"><svg class="jr3-name" viewBox="80 365 430 133" aria-hidden="true"><use href="#jr3-p9" class="t"/><use href="#jr3-s0" class="y"/><use href="#jr3-s1" class="y"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 425 88 18" aria-hidden="true"><use href="#jr3-p4" class="t"/></svg></div></div></div>
 </section>
+<script>
+/* ТРЕТИЙ БЛОК · жёлтые квадраты двигаются и вращаются при прокрутке (десктоп и телефон) */
+(function () {
+  var sec = document.getElementById('jr3');
+  if (!sec || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var items = [];
+  [].forEach.call(sec.querySelectorAll('.y'), function (el) {
+    var k = /jr3-s1$/.test(el.getAttribute('href') || '') ? 1 : 0;
+    var c = k === 0 ? [487.7, 388.4] : [119.1, 475.0];             /* центр квадрата в системе координат SVG */
+    items.push({ el: el, k: k, cx: c[0], cy: c[1], x: 0, y: 0, r: 0 });
+  });
+  var target = 0, cur = 0, running = false;
+  function progress() {
+    var b = sec.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
+    var p = (vh - b.top) / (vh + b.height);                        /* 0 — блок только появился снизу, 1 — ушёл вверх */
+    return Math.max(0, Math.min(1, p));
+  }
+  function render() {
+    var d = (cur - 0.5) * 2;                                       /* −1 … 1, ноль — когда блок по центру экрана */
+    items.forEach(function (it) {
+      var sgn = it.k === 0 ? 1 : -1;
+      var x = sgn * d * 64, y = -sgn * d * 42, r = sgn * d * 90;
+      it.el.setAttribute('transform', 'translate(' + x.toFixed(2) + ' ' + y.toFixed(2) + ') rotate(' + r.toFixed(2) + ' ' + it.cx + ' ' + it.cy + ')');
+    });
+  }
+  function tick() {
+    cur += (target - cur) * 0.14;
+    if (Math.abs(target - cur) < 0.0004) { cur = target; running = false; render(); return; }
+    render(); requestAnimationFrame(tick);
+  }
+  function onScroll() { target = progress(); if (!running) { running = true; requestAnimationFrame(tick); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  cur = target = progress(); render();
+})();
+</script>
 
 <script>
 (function () {
