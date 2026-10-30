@@ -254,7 +254,7 @@
 <div class="jr3-mob"><div class="jr3-row"><svg class="jr3-name" viewBox="80 42 430 64" aria-hidden="true"><use href="#jr3-p5" class="t"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 94 72 16" aria-hidden="true"><use href="#jr3-p0" class="t"/></svg></div></div><div class="jr3-row"><svg class="jr3-name" viewBox="80 122 430 68" aria-hidden="true"><use href="#jr3-p6" class="t"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 177 107 16" aria-hidden="true"><use href="#jr3-p1" class="t"/></svg><svg class="jr3-smp" viewBox="956 179 112 21" aria-hidden="true"><use href="#jr3-p10" class="t"/></svg></div></div><div class="jr3-row"><svg class="jr3-name" viewBox="80 220 430 82" aria-hidden="true"><use href="#jr3-p7" class="t"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 260 60 18" aria-hidden="true"><use href="#jr3-p2" class="t"/></svg><svg class="jr3-smp" viewBox="956 259 95 23" aria-hidden="true"><use href="#jr3-p11" class="t"/></svg></div></div><div class="jr3-row"><svg class="jr3-name" viewBox="80 298 430 66" aria-hidden="true"><use href="#jr3-p8" class="t"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 342 88 18" aria-hidden="true"><use href="#jr3-p3" class="t"/></svg><svg class="jr3-smp" viewBox="956 337 152 21" aria-hidden="true"><use href="#jr3-p12" class="t"/></svg></div></div><div class="jr3-row"><svg class="jr3-name" viewBox="80 365 430 133" aria-hidden="true"><use href="#jr3-p9" class="t"/><use href="#jr3-s0" class="y"/><use href="#jr3-s1" class="y"/></svg><div class="jr3-meta"><svg class="jr3-lab" viewBox="606 425 88 18" aria-hidden="true"><use href="#jr3-p4" class="t"/></svg></div></div></div>
 </section>
 <script>
-/* ТРЕТИЙ БЛОК · жёлтые квадраты двигаются и вращаются при прокрутке (десктоп и телефон) */
+/* ТРЕТИЙ БЛОК · жёлтые квадраты плавно едут вверх/вниз при прокрутке (десктоп и телефон) */
 (function () {
   var sec = document.getElementById('jr3');
   if (!sec || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
@@ -273,9 +273,9 @@
   function render() {
     var d = (cur - 0.5) * 2;                                       /* −1 … 1, ноль — когда блок по центру экрана */
     items.forEach(function (it) {
-      var sgn = it.k === 0 ? 1 : -1;
-      var x = sgn * d * 64, y = -sgn * d * 42, r = sgn * d * 90;
-      it.el.setAttribute('transform', 'translate(' + x.toFixed(2) + ' ' + y.toFixed(2) + ') rotate(' + r.toFixed(2) + ' ' + it.cx + ' ' + it.cy + ')');
+      /* только вертикаль: верхний квадрат при прокрутке вниз уходит вверх, нижний — вниз; на старом месте — когда блок по центру экрана */
+      var y = (it.k === 0 ? -1 : 1) * d * 46;
+      it.el.setAttribute('transform', 'translate(0 ' + y.toFixed(2) + ')');
     });
   }
   function tick() {
