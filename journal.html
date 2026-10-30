@@ -538,12 +538,17 @@
   .jr7 .jr7-spread picture { display: contents; }
   .jr7 .jr7-spread img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
+  .jr7 .jr7-sq { position: absolute; width: calc(var(--u) * 39.4); height: calc(var(--u) * 39.4); background: #f4ff7b; will-change: transform; }
+  .jr7 .s1 { left: calc(var(--u) * 44.6); top: calc(var(--u) * 239.1); }
+  .jr7 .s2 { left: calc(var(--u) * 18);   top: calc(var(--u) * 355.7); }
+
   @media (max-width: 899px) {
     .jr7 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 56) calc(var(--u) * 23.8) 0; }
     .jr7 .jr7-label { position: static; gap: calc(var(--u) * 5.4); font-size: calc(var(--u) * 18); line-height: 1.02; }
     .jr7 .jr7-label .w { gap: calc(var(--u) * 5.4); }
     /* у картинки широкие прозрачные поля: сам разворот ровно по боковым отступам, лишнее скрыто */
     .jr7 .jr7-spread { position: relative; left: auto; top: auto; width: calc(var(--u) * 644); height: auto; margin: calc(var(--u) * 14) 0 0 calc(var(--u) * -159.5); aspect-ratio: 1680 / 826; }
+    .jr7 .jr7-sq { display: none; }   /* на телефоне квадратов нет */
   }
 </style>
 <!-- ЖУРНАЛ «ИСКОУСЪ» · СЕДЬМОЙ БЛОК: ХУДОЖНИКИ — ВЛАДИМИР ГОРЛОВ, РАБОТЫ ЧЕПЛАШКИ -->
@@ -556,7 +561,34 @@
     </div>
   </div>
   <div class="jr7-spread"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila6134-6436-4435-b066-363935326136/-/format/webp/7.png.webp"><img src="https://static.tildacdn.pub/tila6134-6436-4435-b066-363935326136/7.png" alt="Разворот журнала: Владимир Горлов, работы Чеплашки — акварельные портреты, страницы 38–41" width="1680" height="826"></picture></div>
+  <div class="jr7-sq s1" aria-hidden="true"></div>
+  <div class="jr7-sq s2" aria-hidden="true"></div>
 </section>
+<script>
+/* СЕДЬМОЙ БЛОК · два жёлтых квадрата плавно едут вверх/вниз при прокрутке (на телефоне скрыты) */
+(function () {
+  var sec = document.getElementById('jr7');
+  if (!sec || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var sqs = [].slice.call(sec.querySelectorAll('.jr7-sq')), target = 0, cur = 0, running = false;
+  function progress() {
+    var b = sec.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
+    return Math.max(0, Math.min(1, (vh - b.top) / (vh + b.height)));   /* 0 — блок появился снизу, 1 — ушёл вверх */
+  }
+  function render() {
+    var d = (cur - 0.5) * 2, amp = 46;  /* d = 0, когда блок по центру экрана */
+    sqs.forEach(function (el, i) { el.style.transform = 'translate3d(0,' + ((i === 0 ? -1 : 1) * d * amp).toFixed(2) + 'px,0)'; });
+  }
+  function tick() {
+    cur += (target - cur) * 0.14;
+    if (Math.abs(target - cur) < 0.0004) { cur = target; running = false; render(); return; }
+    render(); requestAnimationFrame(tick);
+  }
+  function onScroll() { target = progress(); if (!running) { running = true; requestAnimationFrame(tick); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  cur = target = progress(); render();
+})();
+</script>
 
 <script>
 (function () {
