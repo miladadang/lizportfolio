@@ -686,6 +686,84 @@
 })();
 </script>
 
+<style>
+  .jr10 {
+    --u: calc(100vw / 1200);
+    --k: calc(var(--u) * 0.857143);                 /* 1 единица макета разворота (ряд 825–912 × 109) */
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 600);
+    background: #000;
+  }
+  .jr10 *, .jr10 *::before, .jr10 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .jr10 .row { position: absolute; width: calc(var(--k) * var(--rw)); height: calc(var(--k) * 109); }
+  .jr10 .c {
+    position: absolute; display: block;
+    left: calc(var(--k) * var(--x)); top: calc(var(--k) * var(--y));
+    width: calc(var(--k) * var(--w)); height: calc(var(--k) * var(--h));
+    background-color: #fff;
+    background-image: url("assets/iskousz-grid-sprite.jpg");
+    background-image: -webkit-image-set(url("assets/iskousz-grid-sprite.jpg") type("image/webp"), url("assets/iskousz-grid-sprite.jpg") type("image/jpeg"));
+    background-image: image-set(url("assets/iskousz-grid-sprite.jpg") type("image/webp"), url("assets/iskousz-grid-sprite.jpg") type("image/jpeg"));
+    background-repeat: no-repeat;
+    background-size: calc(var(--k) * 853.818) calc(var(--k) * 548.727);
+    background-position: calc(var(--k) * var(--sx) * -1) calc(var(--k) * var(--sy) * -1);
+    box-shadow: inset 0 0 0 calc(var(--k) * .864) #585858;
+  }
+  .jr10 .r1 { --rw: 911; left: calc(var(--u) * 171.8); top: calc(var(--u) * 31.4); }
+  .jr10 .r2 { --rw: 825; left: calc(var(--u) * 247.4); top: calc(var(--u) * 141.8); }
+  .jr10 .r3 { --rw: 825; left: calc(var(--u) * 247.4); top: calc(var(--u) * 253.4); }
+  .jr10 .r4 { --rw: 825; left: calc(var(--u) * 247.4); top: calc(var(--u) * 363.8); }
+  .jr10 .r5 { --rw: 912; left: calc(var(--u) * 247.4); top: calc(var(--u) * 474.2); }
+
+  @media (max-width: 899px) {
+    .jr10 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8); }
+    /* тот же рисунок, что на десктопе: каждый ряд растягивается ровно на ширину между отступами 23,8 */
+    .jr10 .row { --k: calc(var(--u) * 342.4 / var(--rw)); position: relative; left: auto; top: auto; margin-top: calc(var(--u) * 7.5); }
+    .jr10 .row:first-child { margin-top: 0; }
+  }
+</style>
+<!-- ЖУРНАЛ «ИСКОУСЪ» · ДЕСЯТЫЙ БЛОК: ВСЕ РАЗВОРОТЫ ЖУРНАЛА -->
+<section class="jr10" id="jr10" role="img" aria-label="Все развороты журнала «Искоусъ»: обложка, содержание, интервью с художниками, блиц, задняя обложка">
+    <div class="row r1">
+      <i class="c" style="--x:0.432;--y:0.432;--w:75.349;--h:107.439;--sx:0.0;--sy:0.0"></i>
+      <i class="c" style="--x:89.645;--y:0.432;--w:152.509;--h:107.439;--sx:78.182;--sy:0.0"></i>
+      <i class="c" style="--x:256.018;--y:0.432;--w:153.182;--h:107.439;--sx:233.455;--sy:0.0"></i>
+      <i class="c" style="--x:423.063;--y:0.432;--w:153.182;--h:107.439;--sx:389.455;--sy:0.0"></i>
+      <i class="c" style="--x:590.11;--y:0.432;--w:153.182;--h:107.439;--sx:545.455;--sy:0.0"></i>
+      <i class="c" style="--x:757.155;--y:0.432;--w:152.509;--h:107.439;--sx:701.455;--sy:0.0"></i>
+    </div>
+    <div class="row r2">
+      <i class="c" style="--x:0.432;--y:0.432;--w:151.562;--h:108.107;--sx:0.0;--sy:110.182"></i>
+      <i class="c" style="--x:167.858;--y:0.432;--w:152.231;--h:108.107;--sx:154.545;--sy:110.182"></i>
+      <i class="c" style="--x:335.953;--y:0.432;--w:152.231;--h:108.107;--sx:309.818;--sy:110.182"></i>
+      <i class="c" style="--x:504.047;--y:0.432;--w:152.231;--h:108.107;--sx:465.091;--sy:110.182"></i>
+      <i class="c" style="--x:672.143;--y:0.432;--w:152.231;--h:108.107;--sx:620.364;--sy:110.182"></i>
+    </div>
+    <div class="row r3">
+      <i class="c" style="--x:0.432;--y:0.432;--w:151.562;--h:107.439;--sx:0.0;--sy:221.091"></i>
+      <i class="c" style="--x:167.858;--y:0.432;--w:152.231;--h:107.439;--sx:154.545;--sy:221.091"></i>
+      <i class="c" style="--x:335.953;--y:0.432;--w:152.231;--h:107.439;--sx:309.818;--sy:221.091"></i>
+      <i class="c" style="--x:504.047;--y:0.432;--w:152.231;--h:107.439;--sx:465.091;--sy:221.091"></i>
+      <i class="c" style="--x:672.143;--y:0.432;--w:152.231;--h:107.439;--sx:620.364;--sy:221.091"></i>
+    </div>
+    <div class="row r4">
+      <i class="c" style="--x:0.432;--y:0.432;--w:151.562;--h:107.439;--sx:0.0;--sy:331.273"></i>
+      <i class="c" style="--x:167.858;--y:0.432;--w:152.231;--h:107.439;--sx:154.545;--sy:331.273"></i>
+      <i class="c" style="--x:335.953;--y:0.432;--w:152.231;--h:107.439;--sx:309.818;--sy:331.273"></i>
+      <i class="c" style="--x:504.047;--y:0.432;--w:152.231;--h:107.439;--sx:465.091;--sy:331.273"></i>
+      <i class="c" style="--x:672.143;--y:0.432;--w:152.231;--h:107.439;--sx:620.364;--sy:331.273"></i>
+    </div>
+    <div class="row r5">
+      <i class="c" style="--x:0.432;--y:0.432;--w:151.562;--h:107.439;--sx:0.0;--sy:441.455"></i>
+      <i class="c" style="--x:166.858;--y:0.432;--w:152.231;--h:107.439;--sx:154.545;--sy:441.455"></i>
+      <i class="c" style="--x:333.953;--y:0.432;--w:152.231;--h:107.439;--sx:309.818;--sy:441.455"></i>
+      <i class="c" style="--x:501.047;--y:0.432;--w:152.231;--h:107.439;--sx:465.091;--sy:441.455"></i>
+      <i class="c" style="--x:668.143;--y:0.432;--w:152.231;--h:107.439;--sx:620.364;--sy:441.455"></i>
+      <i class="c" style="--x:835.237;--y:0.432;--w:75.349;--h:107.439;--sx:775.636;--sy:441.455"></i>
+    </div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
