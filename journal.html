@@ -102,12 +102,12 @@
   /* ---------- tablet / mobile ---------- */
   @media (max-width: 899px) {
     :root { --u: calc(100vw / 390); }
-    .menu { position: fixed; z-index: 20; height: 42px; background: url("assets/menu-gradient.png") center / 100% 100% no-repeat; }
+    .menu { position: fixed; z-index: 20; height: 44px; background: url("assets/menu-gradient.png") center / 100% 100% no-repeat; }
     .menu .menu-d { display: none; }
-    .menu-m { display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 16px 0; }
+    .menu-m { display: flex; justify-content: space-between; align-items: flex-start; padding: 15px 16px 0; }
     .menu-m a, .toggle {
       appearance: none; background: none; border: 0; cursor: pointer; color: #fff; text-decoration: none;
-      font: 400 12px/12px var(--font); letter-spacing: .02em; text-transform: uppercase;
+      font: 400 14px/14px var(--font); letter-spacing: .02em; text-transform: uppercase;
       -webkit-tap-highlight-color: transparent;
     }
     .backdrop { display: block; position: fixed; inset: 0; z-index: 17; visibility: hidden; }
@@ -121,7 +121,7 @@
     }
     body.is-open .drawer { transform: none; visibility: visible; transition-delay: 0s; }
     .proj {
-      color: #fff; text-decoration: none; font: 400 12px/14px var(--font); letter-spacing: .02em; text-transform: uppercase;
+      color: #fff; text-decoration: none; font: 400 14px/16px var(--font); letter-spacing: .02em; text-transform: uppercase;
       -webkit-tap-highlight-color: transparent;
     }
     .proj.is-on { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
