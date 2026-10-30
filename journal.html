@@ -296,7 +296,7 @@
     --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
     --grey: #585858;
     position: relative; overflow: hidden;
-    height: calc(var(--u) * 610);
+    height: calc(var(--u) * 579);
     background: #000; color: #fff;
     font-family: var(--jr-font);
     -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
@@ -304,14 +304,15 @@
   .jr4 *, .jr4 *::before, .jr4 *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   .jr4 .jr4-label {
-    position: absolute; left: calc(var(--u) * 84); top: calc(var(--u) * 53);
-    display: flex; flex-direction: column; gap: calc(var(--u) * 6.6);
+    position: absolute; left: calc(var(--u) * 84); top: calc(var(--u) * 32.4);
+    display: flex; flex-direction: column; gap: calc(var(--u) * 3.4);
     font-size: calc(var(--u) * 14); line-height: 1.03; text-transform: uppercase; text-align: left;
   }
   .jr4 .jr4-label .g { color: var(--grey); letter-spacing: .02em; }
-  .jr4 .jr4-label .w { display: flex; flex-direction: column; gap: calc(var(--u) * 9.6); }
+  .jr4 .jr4-label .w { display: flex; flex-direction: column; gap: calc(var(--u) * 4.6); }
 
-  .jr4 .jr4-spread { position: absolute; left: calc(var(--u) * 212); top: calc(var(--u) * 34.5); width: calc(var(--u) * 786); height: calc(var(--u) * 575); }
+  .jr4 .jr4-spread { position: absolute; left: calc(var(--u) * 211.6); top: calc(var(--u) * 3.6); width: calc(var(--u) * 786); height: calc(var(--u) * 575); }
+  .jr4 .jr4-sq { position: absolute; left: calc(var(--u) * 1116); top: calc(var(--u) * 498.9); width: calc(var(--u) * 42.86); height: calc(var(--u) * 42.86); background: #f4ff7b; will-change: transform; }
   .jr4 .jr4-spread picture { display: contents; }
   .jr4 .jr4-spread img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
@@ -319,6 +320,7 @@
     .jr4 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 56) calc(var(--u) * 23.8) calc(var(--u) * 48); }
     .jr4 .jr4-label { position: static; gap: calc(var(--u) * 5.4); font-size: calc(var(--u) * 18); line-height: 1.02; }
     .jr4 .jr4-label .w { gap: calc(var(--u) * 5.4); }
+    .jr4 .jr4-sq { position: relative; left: auto; top: auto; width: calc(var(--u) * 36); height: calc(var(--u) * 36); margin: calc(var(--u) * 26) 0 0 auto; }
     .jr4 .jr4-spread { position: relative; left: auto; top: auto; width: calc(var(--u) * 426.6); height: auto; margin: calc(var(--u) * 14) 0 0 calc(var(--u) * -29.9); aspect-ratio: 1572 / 1150; }
   }
 </style>
@@ -332,7 +334,30 @@
     </div>
   </div>
   <div class="jr4-spread"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila6138-6631-4531-b536-306465666137/-/format/webp/photo.png.webp"><img src="https://static.tildacdn.pub/tila6138-6631-4531-b536-306465666137/photo.png" alt="Разворот журнала «Искоусъ»: слово редактора «Что такое Искоусъ?»" width="1572" height="1150"></picture></div>
+  <div class="jr4-sq" id="jr4Sq" aria-hidden="true"></div>
 </section>
+<script>
+/* ЧЕТВЁРТЫЙ БЛОК · жёлтый квадрат плавно едет вверх/вниз при прокрутке (десктоп и телефон) */
+(function () {
+  var sec = document.getElementById('jr4'), sq = document.getElementById('jr4Sq');
+  if (!sec || !sq || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var target = 0, cur = 0, running = false;
+  function progress() {
+    var b = sec.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
+    return Math.max(0, Math.min(1, (vh - b.top) / (vh + b.height)));   /* 0 — блок появился снизу, 1 — ушёл вверх */
+  }
+  function render() { var amp = window.innerWidth < 900 ? 24 : 46; sq.style.transform = 'translate3d(0,' + ((cur - 0.5) * 2 * amp).toFixed(2) + 'px,0)'; }  /* 0 — когда блок по центру экрана; на телефоне размах меньше */
+  function tick() {
+    cur += (target - cur) * 0.14;
+    if (Math.abs(target - cur) < 0.0004) { cur = target; running = false; render(); return; }
+    render(); requestAnimationFrame(tick);
+  }
+  function onScroll() { target = progress(); if (!running) { running = true; requestAnimationFrame(tick); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  cur = target = progress(); render();
+})();
+</script>
 
 <script>
 (function () {
