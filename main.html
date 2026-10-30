@@ -167,7 +167,7 @@
       <div class="lz-photo" id="lzPhoto"><div class="lz-photo-in"><img src="assets/photo.png" alt="Елизавета" width="615" height="820"></div></div>
     </div>
     <p class="lz-intro">Привет! Меня зовут Елизавета, приятно познакомиться! С 2025 года я работаю графическим дизайнером. Разрабатываю креативные продуктовые презентации, рекламу для соц-сетей и баннеров, конструкцию и дизайн упаковок, POS-материалы, многостраничную полиграфию. Владею Figma, Photoshop, Illustrator, InDesign и Tilda. Активно использую ИИ (Nano Banana, GPT) для оптимизации работы, чтобы оставить как можно больше времени для творчества</p>
-    <p class="lz-contact">Связаться со мной можно <a href="#telegram">в телеграме,</a> <a href="#email">по почте</a> или по номеру <a href="tel:+79157282494" class="lz-nb">+79157282494</a></p>
+    <p class="lz-contact">Связаться со мной можно <a href="https://t.me/liza_dsgn1" target="_blank" rel="noopener">в телеграме,</a> <a href="mailto:Kul.e.m@yandex.ru">по почте</a> или по номеру <a href="tel:+79157282494" class="lz-nb">+79157282494</a></p>
   </main>
 </div>
 
@@ -188,9 +188,7 @@
     a.addEventListener('click', function (e) {
       Array.prototype.forEach.call(drawer.querySelectorAll('.lz-proj'), function (x) { x.classList.remove('is-on'); });
       a.classList.add('is-on');
-      var href = a.getAttribute('href');
-      if (href.charAt(0) !== '#') { e.preventDefault(); setTimeout(function () { location.href = href; }, 320); }
-      else { setTimeout(function () { setOpen(false); }, 380); }
+      if (a.getAttribute('href').charAt(0) === '#') { setTimeout(function () { setOpen(false); }, 380); }
     });
   });
 })();
