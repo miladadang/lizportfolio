@@ -513,6 +513,51 @@
 })();
 </script>
 
+<style>
+  .jr7 {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --grey: #585858;
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 582.6);
+    background: #000; color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  }
+  .jr7 *, .jr7 *::before, .jr7 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .jr7 .jr7-label {
+    position: absolute; left: calc(var(--u) * 84); top: calc(var(--u) * 94.4);
+    display: flex; flex-direction: column; gap: calc(var(--u) * 3.4);
+    font-size: calc(var(--u) * 14); line-height: 1.03; text-transform: uppercase; text-align: left;
+  }
+  .jr7 .jr7-label .g { color: var(--grey); letter-spacing: .02em; }
+  .jr7 .jr7-label .w { display: flex; flex-direction: column; gap: calc(var(--u) * 4.6); }
+
+  .jr7 .jr7-spread { position: absolute; left: calc(var(--u) * 6.6); top: calc(var(--u) * -0.6); width: calc(var(--u) * 1187.5); height: calc(var(--u) * 583.8); }
+  .jr7 .jr7-spread picture { display: contents; }
+  .jr7 .jr7-spread img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+  @media (max-width: 899px) {
+    .jr7 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 56) calc(var(--u) * 23.8) 0; }
+    .jr7 .jr7-label { position: static; gap: calc(var(--u) * 5.4); font-size: calc(var(--u) * 18); line-height: 1.02; }
+    .jr7 .jr7-label .w { gap: calc(var(--u) * 5.4); }
+    /* у картинки широкие прозрачные поля: сам разворот ровно по боковым отступам, лишнее скрыто */
+    .jr7 .jr7-spread { position: relative; left: auto; top: auto; width: calc(var(--u) * 644); height: auto; margin: calc(var(--u) * 14) 0 0 calc(var(--u) * -159.5); aspect-ratio: 1680 / 826; }
+  }
+</style>
+<!-- ЖУРНАЛ «ИСКОУСЪ» · СЕДЬМОЙ БЛОК: ХУДОЖНИКИ — ВЛАДИМИР ГОРЛОВ, РАБОТЫ ЧЕПЛАШКИ -->
+<section class="jr7" id="jr7">
+  <div class="jr7-label">
+    <span class="g">Художники:</span>
+    <div class="w">
+      <span>Владимир Горлов</span>
+      <span>Работы Чеплашки</span>
+    </div>
+  </div>
+  <div class="jr7-spread"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila6134-6436-4435-b066-363935326136/-/format/webp/7.png.webp"><img src="https://static.tildacdn.pub/tila6134-6436-4435-b066-363935326136/7.png" alt="Разворот журнала: Владимир Горлов, работы Чеплашки — акварельные портреты, страницы 38–41" width="1680" height="826"></picture></div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
