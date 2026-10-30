@@ -379,12 +379,20 @@
   .jr5 .s2 { left: calc(var(--u) * 41.4);  top: calc(var(--u) * 497.4); }
 
   @media (max-width: 899px) {
-    .jr5 { --u: calc(100vw / 360); height: calc(var(--u) * 282); }
-    .jr5 .jr5-pic { width: calc(var(--u) * 150.2); height: calc(var(--u) * 105.3); }
-    .jr5 .p1 { left: calc(var(--u) * 32.2);  top: calc(var(--u) * 12); }
-    .jr5 .p2 { left: calc(var(--u) * 188.5); top: calc(var(--u) * 12); }
-    .jr5 .p3 { left: calc(var(--u) * 32.2);  top: calc(var(--u) * 127.9); }
-    .jr5 .p4 { left: calc(var(--u) * 188.5); top: calc(var(--u) * 127.9); }
+    .jr5 {
+      --u: calc(100vw / 360);
+      --m: calc(100vw * 23.8 / 390);                        /* боковой отступ — такой же, как у заголовков в других блоках */
+      --g: calc(var(--u) * 8);                              /* одинаковый зазор между разворотами по горизонтали и вертикали */
+      --t: calc(var(--u) * 24);                             /* отступ сверху, от предыдущего блока */
+      --w: calc((100vw - 2 * var(--m) - var(--g)) / 2);
+      --h: calc(var(--w) / 1.4259);
+      height: calc(var(--t) + 2 * var(--h) + var(--g) + var(--u) * 40);
+    }
+    .jr5 .jr5-pic { width: var(--w); height: var(--h); }
+    .jr5 .p1 { left: var(--m);                              top: var(--t); }
+    .jr5 .p2 { left: calc(var(--m) + var(--w) + var(--g));  top: var(--t); }
+    .jr5 .p3 { left: var(--m);                              top: calc(var(--t) + var(--h) + var(--g)); }
+    .jr5 .p4 { left: calc(var(--m) + var(--w) + var(--g));  top: calc(var(--t) + var(--h) + var(--g)); }
     .jr5 .jr5-sq { display: none; }   /* на телефоне квадратов нет */
   }
 </style>
