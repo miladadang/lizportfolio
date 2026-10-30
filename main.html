@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Елизавета — графический дизайнер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Inter+Tight:wght@400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: #000; }
+  .lz-hero {
+    --u: min(calc(100vw / 1200), calc(100svh / 686));
+    --lz-bold: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --lz-text: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --t0: -8; --t1: -10; --t2: -10;
+    position: relative;
+    height: 100vh; height: 100svh;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+  .lz-hero *, .lz-hero *::before, .lz-hero *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* gradient: y=351.18 of 685.2 -> bottom 48.75% */
+  .lz-hero .lz-bg {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 48.75%;
+    background: linear-gradient(180.47deg, rgba(153,153,153,0) 10.17%, #999 100.58%);
+  }
+
+  /* menu: fixed to the viewport, with the gradient */
+  .lz-hero .lz-menu {
+    position: fixed; z-index: 20; left: 0; top: 0; width: 100%;
+    height: max(32px, calc(var(--u) * 34.26));
+    background: url("assets/menu-gradient.png") center / 100% 100% no-repeat;
+  }
+  .lz-hero .lz-menu ul {
+    list-style: none; display: flex; justify-content: space-between;
+    padding: max(10px, calc(var(--u) * 12)) max(16px, calc(var(--u) * 85.65)) 0;
+  }
+  .lz-hero .lz-menu a {
+    display: block; overflow: hidden; color: #fff; text-decoration: none; white-space: nowrap;
+    font: 400 max(10px, calc(var(--u) * 12))/max(10px, calc(var(--u) * 12)) var(--lz-text);
+    letter-spacing: .02em; text-transform: uppercase;
+  }
+  .lz-hero .lz-menu .roll { position: relative; display: block; transition: transform .55s cubic-bezier(.19,1,.22,1); }
+  .lz-hero .lz-menu .roll::after { content: attr(data-text); position: absolute; left: 0; top: 100%; }
+  .lz-hero .lz-menu a:hover .roll { transform: translateY(-100%); }
+
+  /* stage: 1200 x 686 design space */
+  .lz-hero .lz-stage {
+    position: absolute; z-index: 2; left: 50%; top: 50%;
+    width: calc(var(--u) * 1200); height: calc(var(--u) * 686);
+    transform: translate(-50%, -50%);
+  }
+  .lz-hero .lz-title {
+    position: absolute; inset: 0; font-weight: 400;
+    font: 700 calc(var(--u) * 172.163)/calc(var(--u) * 172.163) var(--lz-bold);
+    text-transform: uppercase; text-align: center; white-space: nowrap;
+  }
+  .lz-hero .lz-title span { position: absolute; left: 0; width: 100%; display: block; }
+  .lz-hero .lz-title .t0 { top: calc(var(--u) * (52 + var(--t0))); }
+  .lz-hero .lz-title .t1 { top: calc(var(--u) * (217 + var(--t1))); }
+  .lz-hero .lz-title .t2 { top: calc(var(--u) * (382 + var(--t2))); }
+
+  .lz-hero .lz-photo {
+    position: absolute; z-index: 3;
+    left: calc(var(--u) * 475.8); top: calc(var(--u) * 141.6);
+    width: calc(var(--u) * 247); height: calc(var(--u) * 306);
+    will-change: transform;
+  }
+  .lz-hero .lz-photo-in {
+    position: absolute; inset: 0; background: #642aee; overflow: hidden;
+    transition: transform 1.2s cubic-bezier(.19,1,.22,1);
+  }
+  .lz-hero .lz-photo:hover .lz-photo-in { transform: scale(1.05); }
+  .lz-hero .lz-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .lz-hero .lz-intro, .lz-hero .lz-contact {
+    position: absolute; z-index: 2; text-align: center;
+    font: 400 max(11px, calc(var(--u) * 14))/calc(var(--u) * 13.704) var(--lz-text);
+    letter-spacing: .02em;
+  }
+  .lz-hero .lz-intro { left: calc(var(--u) * 170.8); top: calc(var(--u) * 557.5); width: calc(var(--u) * 859.1); }
+  .lz-hero .lz-contact { left: 0; width: 100%; top: calc(var(--u) * 624.4); white-space: nowrap; }
+  .lz-hero a { color: #fff; text-decoration: underline; text-underline-position: from-font; text-decoration-skip-ink: none; }
+  .lz-hero .lz-nb { white-space: nowrap; }
+
+  .lz-hero .lz-titlebox { display: contents; }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 767px) {
+    .lz-hero { height: auto; min-height: 100svh; overflow: hidden; --m: 16vw; }
+    .lz-hero .lz-menu { height: auto; padding-bottom: 12px; }
+    .lz-hero .lz-menu ul { padding: 12px 16px 0; gap: 6px 14px; flex-wrap: wrap; }
+    .lz-hero .lz-menu a { font-size: 10px; line-height: 10px; }
+    .lz-hero .lz-stage {
+      position: relative; left: auto; top: auto; transform: none;
+      width: 100%; height: auto; min-height: 100svh; padding: 88px 16px 48px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .lz-hero .lz-title { position: relative; inset: auto; width: 100%; font-size: var(--m); line-height: .96; }
+    .lz-hero .lz-title span { position: relative; top: auto !important; }
+    .lz-hero .lz-photo {
+      left: 50%; top: 16.9%; margin-left: -.72em; width: 1.44em; height: 1.78em; font-size: var(--m);
+    }
+    .lz-hero .lz-titlebox { display: block; position: relative; width: 100%; }
+    .lz-hero .lz-intro, .lz-hero .lz-contact { position: relative; left: auto; top: auto; width: 100%; font-size: 14px; line-height: 1.28; }
+    .lz-hero .lz-intro { margin-top: 44px; text-wrap: pretty; }
+    .lz-hero .lz-contact { margin-top: 22px; white-space: normal; text-wrap: balance; }
+  }
+</style>
+</head>
+<body>
+<div class="lz-hero">
+  <div class="lz-bg"></div>
+
+  <nav class="lz-menu">
+    <ul>
+      <li><a href="#about"><span class="roll" data-text="обо мне">обо мне</span></a></li>
+      <li><a href="#web"><span class="roll" data-text="веб-дизайн">веб-дизайн</span></a></li>
+      <li><a href="#packaging"><span class="roll" data-text="упаковка &amp; e-com">упаковка &amp; e-com</span></a></li>
+      <li><a href="journal.html"><span class="roll" data-text="журнал">журнал</span></a></li>
+    </ul>
+  </nav>
+
+  <main class="lz-stage" id="about">
+    <div class="lz-titlebox">
+      <h1 class="lz-title" aria-label="Oh, just that design">
+        <span class="t0" aria-hidden="true">Oh,</span>
+        <span class="t1" aria-hidden="true">Just that</span>
+        <span class="t2" aria-hidden="true">Design</span>
+      </h1>
+      <div class="lz-photo" id="lzPhoto"><div class="lz-photo-in"><img src="assets/photo.png" alt="Елизавета" width="615" height="820"></div></div>
+    </div>
+    <p class="lz-intro">Привет! Меня зовут Елизавета, приятно познакомиться! С 2025 года я работаю графическим дизайнером. Разрабатываю креативные продуктовые презентации, рекламу для соц-сетей и баннеров, конструкцию и дизайн упаковок, POS-материалы, многостраничную полиграфию. Владею Figma, Photoshop, Illustrator, InDesign и Tilda. Активно использую ИИ (Nano Banana, GPT) для оптимизации работы, чтобы оставить как можно больше времени для творчества</p>
+    <p class="lz-contact">Связаться со мной можно <a href="#telegram">в телеграме,</a> <a href="#email">по почте</a> или по номеру <a href="tel:+79157282494" class="lz-nb">+79157282494</a></p>
+  </main>
+</div>
+
+<script>
+(function () {
+  var photo = document.getElementById('lzPhoto');
+  if (!photo || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var hero = photo.closest('.lz-hero');
+  var tx = 0, ty = 0, cx = 0, cy = 0, tilt = false, last = 0;
+  var clamp = function (v) { return Math.max(-1, Math.min(1, v)); };
+  var small = function () { return matchMedia('(max-width: 767px)').matches; };
+  var unit = function () { return Math.min(innerWidth / 1200, innerHeight / 686); };
+
+  /* mouse / finger */
+  addEventListener('pointermove', function (e) {
+    tx = (e.clientX / innerWidth) * 2 - 1;
+    ty = (e.clientY / innerHeight) * 2 - 1;
+    last = performance.now();
+  });
+  document.addEventListener('pointerleave', function () { tx = 0; ty = 0; });
+
+  /* phone tilt (iOS asks for permission on the first tap) */
+  function onTilt(e) {
+    if (e.gamma == null) return;
+    tilt = true; last = performance.now();
+    tx = clamp(e.gamma / 22);
+    ty = clamp((e.beta - 40) / 22);
+  }
+  function listenTilt() { addEventListener('deviceorientation', onTilt); }
+  if (window.DeviceOrientationEvent) {
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      addEventListener('touchend', function ask() {
+        removeEventListener('touchend', ask);
+        DeviceOrientationEvent.requestPermission().then(function (r) { if (r === 'granted') listenTilt(); }).catch(function () {});
+      }, { passive: true });
+    } else { listenTilt(); }
+  }
+
+  function frame(t) {
+    var idle = small() && !tilt && t - last > 1500;      /* no sensor, no touch: gentle drift */
+    var gx = idle ? Math.sin(t / 1700) * .55 : tx, gy = idle ? Math.cos(t / 2300) * .45 : ty;
+    cx += (gx - cx) * .075; cy += (gy - cy) * .075;
+    var ax, ay;
+    if (small()) { ax = 16; ay = 14; } else { var u = unit(); ax = 52 * u; ay = 38 * u; }
+    photo.style.transform = 'translate3d(' + (cx * ax).toFixed(2) + 'px,' + (cy * ay).toFixed(2) + 'px,0)';
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
