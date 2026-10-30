@@ -54,7 +54,7 @@
   .jr .jr-info {
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     gap: calc(var(--u) * 30);
-    padding: calc(var(--u) * 60) calc(var(--u) * 129);
+    padding: calc(var(--u) * 60) calc(var(--u) * 100);
     text-align: center;
   }
   .jr .jr-info > * { width: 100%; }
@@ -68,7 +68,7 @@
   .jr .jr-label { color: var(--grey); text-transform: uppercase; letter-spacing: .02em; }
   .jr .jr-about { display: flex; flex-direction: column; gap: calc(var(--u) * 6); }
   .jr .jr-about .jr-body { display: flex; flex-direction: column; gap: calc(var(--u) * 10); }
-  .jr .jr-ln { display: block; }
+  .jr .jr-ln { display: block; white-space: nowrap; }
   .jr .jr-mb { display: inline; }
 
   /* photo: grows smoothly inside its frame on hover */
@@ -110,13 +110,15 @@
 
     .jr .jr-block { grid-template-columns: 1fr; min-height: 0; }
     .jr .jr-photo { order: -1; aspect-ratio: 689 / 892; }
+    .jr .jr-photo img { object-position: 25% 50%; }
     .jr .jr-photo:hover img { transform: none; }
     .jr .jr-info { padding: 56px 20px 72px; gap: 32px; }
     .jr .jr-title { font-size: clamp(32px, 11vw, 54px); }
-    .jr .jr-text { font-size: clamp(15px, 4.7vw, 22px); line-height: 1.02; }
+    .jr .jr-text { font-size: clamp(15px, 4.5vw, 22px); line-height: 1.02; }
     .jr .jr-list { gap: 6px; }
     .jr .jr-about { gap: 10px; }
     .jr .jr-about .jr-body { gap: 18px; }
+    .jr .jr-ln { white-space: normal; }
     .jr .jr-mb { display: block; }
     .jr .jr-body p:first-child .jr-ln { display: inline; }
   }
@@ -160,14 +162,14 @@
       <div class="jr-text jr-about">
         <span class="jr-label">о проекте:</span>
         <div class="jr-body">
-          <p><span class="jr-ln">«Искоусъ»&nbsp;— журнал, в&nbsp;котором пишут о&nbsp;том, как </span><span class="jr-ln">искусство встраивается в&nbsp;современный мир и&nbsp;о&nbsp;людях, </span><span class="jr-ln">которые его встраивают</span></p>
+          <p><span class="jr-ln">«Искоусъ»&nbsp;— журнал, в&nbsp;котором пишут о&nbsp;том, как </span><span class="jr-ln">искусство встраивается в&nbsp;современный мир и&nbsp;о&nbsp;людях, </span><span class="jr-ln">которые его&nbsp;встраивают</span></p>
           <p><span class="jr-ln">Структура журнала состит из&nbsp;слов автора</span><span class="jr-ln">и&nbsp;двух записанных интервью <span class="jr-mb">с&nbsp;художником</span></span><span class="jr-ln">и&nbsp;галлеристом из&nbsp;СПБ</span></p>
         </div>
       </div>
     </section>
 
     <section class="jr-photo" aria-label="Журнал «Искоусъ»">
-      <img src="assets/journal-cover.jpg" alt="Журнал «Искоусъ» — стопка номеров и рука, держащая верхний номер" width="1279" height="1700">
+      <img src="assets/journal-cover.jpg" alt="Журнал «Искоусъ» — стопка номеров и рука, держащая верхний номер" width="1183" height="1166">
     </section>
   </main>
 </div>
