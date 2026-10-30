@@ -431,6 +431,88 @@
 })();
 </script>
 
+<style>
+  .jr6 {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --grey: #585858;
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 988);
+    background: #000; color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  }
+  .jr6 *, .jr6 *::before, .jr6 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .jr6 .jr6-label {
+    position: absolute; left: calc(var(--u) * 84); top: calc(var(--u) * 40.4);
+    display: flex; flex-direction: column; gap: calc(var(--u) * 3.4);
+    font-size: calc(var(--u) * 14); line-height: 1.03; text-transform: uppercase; text-align: left;
+  }
+  .jr6 .jr6-label .g { color: var(--grey); letter-spacing: .02em; }
+  .jr6 .jr6-label .w { display: flex; flex-direction: column; gap: calc(var(--u) * 4.6); }
+
+  .jr6 .jr6-img { position: absolute; }
+  .jr6 .jr6-img picture { display: contents; }
+  .jr6 .jr6-img img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .jr6 .a { left: calc(var(--u) * 165.1); top: 0;                     width: calc(var(--u) * 871.4);  height: calc(var(--u) * 566.9); }
+  .jr6 .b { left: calc(var(--u) * 64);    top: calc(var(--u) * 576.5); width: calc(var(--u) * 1070.5); height: calc(var(--u) * 399.5); }
+
+  .jr6 .jr6-sq { position: absolute; width: calc(var(--u) * 37.8); height: calc(var(--u) * 37.8); background: #f4ff7b; will-change: transform; }
+  .jr6 .s1 { left: calc(var(--u) * 1155.6); top: calc(var(--u) * 367.8); }
+  .jr6 .s2 { left: calc(var(--u) * 1116);   top: calc(var(--u) * 481.2); }
+
+  @media (max-width: 899px) {
+    .jr6 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 56) calc(var(--u) * 23.8) calc(var(--u) * 24); }
+    .jr6 .jr6-label { position: static; gap: calc(var(--u) * 5.4); font-size: calc(var(--u) * 18); line-height: 1.02; }
+    .jr6 .jr6-label .w { gap: calc(var(--u) * 5.4); }
+    .jr6 .jr6-img { position: relative; left: auto; top: auto; height: auto; }
+    /* у картинок прозрачные поля: разворот ровно по боковым отступам, лишнее скрыто */
+    .jr6 .a { width: calc(var(--u) * 437.8); margin: calc(var(--u) * 14) 0 0 calc(var(--u) * -48.7); aspect-ratio: 1680 / 1093; }
+    .jr6 .b { width: calc(var(--u) * 430.6); margin: calc(var(--u) * -6) 0 0 calc(var(--u) * -44.6); aspect-ratio: 1680 / 627; }
+    .jr6 .jr6-sq { display: none; }
+  }
+</style>
+<!-- ЖУРНАЛ «ИСКОУСЪ» · ШЕСТОЙ БЛОК: ХУДОЖНИКИ — МАКСИМ СМОЛОВ, CABINET ABSTRACT -->
+<section class="jr6" id="jr6">
+  <div class="jr6-label">
+    <span class="g">Художники:</span>
+    <div class="w">
+      <span>Максим Смолов</span>
+      <span>Cabinet Abstract</span>
+    </div>
+  </div>
+  <div class="jr6-img a"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3066-6634-4361-b330-633964393061/-/format/webp/61.png.webp"><img src="https://static.tildacdn.pub/tila3066-6634-4361-b330-633964393061/61.png" alt="Разворот журнала: интервью с Максимом Смоловым, галерея Cabinet Abstract, страницы 18–19" width="1680" height="1093"></picture></div>
+  <div class="jr6-img b"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3564-6465-4763-a266-356263613038/-/format/webp/62.png.webp"><img src="https://static.tildacdn.pub/tila3564-6465-4763-a266-356263613038/62.png" alt="Два разворота журнала: продолжение интервью, проекты «Урбатура» и «Тесно», страницы 20–23" width="1680" height="627"></picture></div>
+  <div class="jr6-sq s1" aria-hidden="true"></div>
+  <div class="jr6-sq s2" aria-hidden="true"></div>
+</section>
+<script>
+/* ШЕСТОЙ БЛОК · два жёлтых квадрата плавно едут вверх/вниз при прокрутке */
+(function () {
+  var sec = document.getElementById('jr6');
+  if (!sec || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var sqs = [].slice.call(sec.querySelectorAll('.jr6-sq')), target = 0, cur = 0, running = false;
+  function progress() {
+    var b = sec.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
+    return Math.max(0, Math.min(1, (vh - b.top) / (vh + b.height)));   /* 0 — блок появился снизу, 1 — ушёл вверх */
+  }
+  function render() {
+    var d = (cur - 0.5) * 2, amp = window.innerWidth < 900 ? 14 : 46;  /* d = 0, когда блок по центру экрана */
+    sqs.forEach(function (el, i) { el.style.transform = 'translate3d(0,' + ((i === 0 ? -1 : 1) * d * amp).toFixed(2) + 'px,0)'; });
+  }
+  function tick() {
+    cur += (target - cur) * 0.14;
+    if (Math.abs(target - cur) < 0.0004) { cur = target; running = false; render(); return; }
+    render(); requestAnimationFrame(tick);
+  }
+  function onScroll() { target = progress(); if (!running) { running = true; requestAnimationFrame(tick); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  cur = target = progress(); render();
+})();
+</script>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
