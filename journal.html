@@ -359,6 +359,72 @@
 })();
 </script>
 
+<style>
+  .jr5 {
+    --u: calc(100vw / 1200);
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 712);
+    background: #000;
+  }
+  .jr5 *, .jr5 *::before, .jr5 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .jr5 .jr5-pic { position: absolute; width: calc(var(--u) * 418.8); height: calc(var(--u) * 293.7); overflow: hidden; }
+  .jr5 .jr5-pic picture { display: contents; }
+  .jr5 .jr5-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .jr5 .p1 { left: calc(var(--u) * 171.6); top: calc(var(--u) * 47.4); }
+  .jr5 .p2 { left: calc(var(--u) * 609);   top: calc(var(--u) * 47.4); }
+  .jr5 .p3 { left: calc(var(--u) * 171.6); top: calc(var(--u) * 371.4); }
+  .jr5 .p4 { left: calc(var(--u) * 609);   top: calc(var(--u) * 371.4); }
+  .jr5 .jr5-sq { position: absolute; width: calc(var(--u) * 42.86); height: calc(var(--u) * 42.86); background: #f4ff7b; will-change: transform; }
+  .jr5 .s1 { left: calc(var(--u) * 1116);  top: calc(var(--u) * 244.2); }
+  .jr5 .s2 { left: calc(var(--u) * 41.4);  top: calc(var(--u) * 497.4); }
+
+  @media (max-width: 899px) {
+    .jr5 { --u: calc(100vw / 390); height: calc(var(--u) * 1181); }
+    .jr5 .jr5-pic { left: calc(var(--u) * 12) !important; width: calc(var(--u) * 366); height: calc(var(--u) * 256.7); }
+    .jr5 .p1 { top: calc(var(--u) * 56); }
+    .jr5 .p2 { top: calc(var(--u) * 326.7); }
+    .jr5 .p3 { top: calc(var(--u) * 597.4); }
+    .jr5 .p4 { top: calc(var(--u) * 868.1); }
+    .jr5 .jr5-sq { width: calc(var(--u) * 36); height: calc(var(--u) * 36); }
+    .jr5 .s1 { left: calc(var(--u) * 342); top: calc(var(--u) * 295); }
+    .jr5 .s2 { left: calc(var(--u) * 12);  top: calc(var(--u) * 836); }
+  }
+</style>
+<!-- ЖУРНАЛ «ИСКОУСЪ» · ПЯТЫЙ БЛОК: РАЗВОРОТЫ (интервью с художниками) -->
+<section class="jr5" id="jr5">
+  <div class="jr5-pic p1"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3731-3262-4136-b534-323963346461/-/format/webp/1.jpg.webp"><img src="https://static.tildacdn.pub/tila3731-3262-4136-b534-323963346461/1.jpg" alt="Разворот журнала: Максим Смолов (Smolow) в студии у окна" width="981" height="688"></picture></div>
+  <div class="jr5-pic p2"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila6436-3734-4532-b531-336133306536/-/format/webp/2.jpg.webp"><img src="https://static.tildacdn.pub/tila6436-3734-4532-b531-336133306536/2.jpg" alt="Разворот журнала: текст о художнике Максе Смолове и интерьер студии" width="981" height="688"></picture></div>
+  <div class="jr5-pic p3"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila6233-3135-4836-b937-663462616538/-/format/webp/3.jpg.webp"><img src="https://static.tildacdn.pub/tila6233-3135-4836-b937-663462616538/3.jpg" alt="Разворот журнала: Владимир Горлов (Чепляш) с рисунком" width="981" height="688"></picture></div>
+  <div class="jr5-pic p4"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3161-3238-4630-b336-376536323737/-/format/webp/4.jpg.webp"><img src="https://static.tildacdn.pub/tila3161-3238-4630-b336-376536323737/4.jpg" alt="Разворот журнала: текст о Владимире Горлове и пастельный портрет" width="981" height="688"></picture></div>
+  <div class="jr5-sq s1" aria-hidden="true"></div>
+  <div class="jr5-sq s2" aria-hidden="true"></div>
+</section>
+<script>
+/* ПЯТЫЙ БЛОК · два жёлтых квадрата плавно едут вверх/вниз при прокрутке (десктоп и телефон) */
+(function () {
+  var sec = document.getElementById('jr5');
+  if (!sec || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var sqs = [].slice.call(sec.querySelectorAll('.jr5-sq')), target = 0, cur = 0, running = false;
+  function progress() {
+    var b = sec.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
+    return Math.max(0, Math.min(1, (vh - b.top) / (vh + b.height)));   /* 0 — блок появился снизу, 1 — ушёл вверх */
+  }
+  function render() {
+    var d = (cur - 0.5) * 2, amp = window.innerWidth < 900 ? 24 : 46;  /* d = 0, когда блок по центру экрана */
+    sqs.forEach(function (el, i) { el.style.transform = 'translate3d(0,' + ((i === 0 ? -1 : 1) * d * amp).toFixed(2) + 'px,0)'; });
+  }
+  function tick() {
+    cur += (target - cur) * 0.14;
+    if (Math.abs(target - cur) < 0.0004) { cur = target; running = false; render(); return; }
+    render(); requestAnimationFrame(tick);
+  }
+  function onScroll() { target = progress(); if (!running) { running = true; requestAnimationFrame(tick); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  cur = target = progress(); render();
+})();
+</script>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
