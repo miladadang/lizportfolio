@@ -290,6 +290,50 @@
 })();
 </script>
 
+<style>
+  .jr4 {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --grey: #585858;
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 610);
+    background: #000; color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  }
+  .jr4 *, .jr4 *::before, .jr4 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .jr4 .jr4-label {
+    position: absolute; left: calc(var(--u) * 84); top: calc(var(--u) * 53);
+    display: flex; flex-direction: column; gap: calc(var(--u) * 6.6);
+    font-size: calc(var(--u) * 14); line-height: 1.03; text-transform: uppercase; text-align: left;
+  }
+  .jr4 .jr4-label .g { color: var(--grey); letter-spacing: .02em; }
+  .jr4 .jr4-label .w { display: flex; flex-direction: column; gap: calc(var(--u) * 9.6); }
+
+  .jr4 .jr4-spread { position: absolute; left: calc(var(--u) * 263.4); top: calc(var(--u) * 50.4); width: calc(var(--u) * 680.4); height: calc(var(--u) * 558); }
+  .jr4 .jr4-spread picture { display: contents; }
+  .jr4 .jr4-spread img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+  @media (max-width: 899px) {
+    .jr4 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 56) calc(var(--u) * 23.8) calc(var(--u) * 48); }
+    .jr4 .jr4-label { position: static; gap: calc(var(--u) * 5.4); font-size: calc(var(--u) * 18); line-height: 1.02; }
+    .jr4 .jr4-label .w { gap: calc(var(--u) * 5.4); }
+    .jr4 .jr4-spread { position: relative; left: auto; top: auto; width: calc(100% + var(--u) * 16); height: auto; margin: calc(var(--u) * 36) calc(var(--u) * -8) 0; aspect-ratio: 1134 / 930; }
+  }
+</style>
+<!-- ЖУРНАЛ «ИСКОУСЪ» · ЧЕТВЁРТЫЙ БЛОК: СЛОВО РЕДАКТОРА -->
+<section class="jr4" id="jr4">
+  <div class="jr4-label">
+    <span class="g">Слово редактора:</span>
+    <div class="w">
+      <span>Что означает<br> название</span>
+      <span>Актуальность</span>
+    </div>
+  </div>
+  <div class="jr4-spread"><picture><img src="assets/journal-spread4.jpg" alt="Разворот журнала «Искоусъ»: слово редактора «Что такое Искоусъ?»" width="1134" height="930"></picture></div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
