@@ -189,44 +189,42 @@
   .jr2 *, .jr2 *::before, .jr2 *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   .jr2 .jr2-label {
-    position: absolute; left: calc(var(--u) * 82); top: calc(var(--u) * 53);
-    display: flex; flex-direction: column; gap: calc(var(--u) * 5);
+    position: absolute; left: calc(var(--u) * 81.6); top: calc(var(--u) * 52.4);
+    display: flex; flex-direction: column; gap: calc(var(--u) * 4.6);
     font-size: calc(var(--u) * 14); line-height: 1; text-transform: uppercase; text-align: left;
   }
   .jr2 .jr2-label .g { color: var(--grey); letter-spacing: .02em; }
+  .jr2 .jr2-label br { display: none; }
 
-  /* every picture sits in a frame and grows smoothly inside it on hover */
+  /* pictures: static, no hover effects */
   .jr2 .jr2-pic { position: absolute; overflow: hidden; }
-  .jr2 .jr2-pic img {
-    display: block; width: 100%; height: 100%; object-fit: cover;
-    transition: transform 1.6s cubic-bezier(.19,1,.22,1);
-    will-change: transform;
-  }
-  .jr2 .jr2-pic:hover img { transform: scale(1.05); }
-  .jr2 .jr2-grid  { left: calc(var(--u) * 82);  top: calc(var(--u) * 159); width: calc(var(--u) * 240); height: calc(var(--u) * 298); }
-  .jr2 .jr2-cover { left: calc(var(--u) * 332); top: calc(var(--u) * 158.5); width: calc(var(--u) * 240); height: calc(var(--u) * 297.5); }
-  .jr2 .jr2-spread { left: 50%; top: calc(var(--u) * 40.3); width: 50%; height: calc(var(--u) * 558.4); }
-  .jr2 .jr2-spread:hover img { transform: scale(1.04); }
+  .jr2 .jr2-pic picture { display: contents; }
+  .jr2 .jr2-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .jr2 .jr2-grid   { left: calc(var(--u) * 84);    top: calc(var(--u) * 189.6); width: calc(var(--u) * 207.6); height: calc(var(--u) * 288); }
+  .jr2 .jr2-cover  { left: calc(var(--u) * 348.6); top: calc(var(--u) * 185.4); width: calc(var(--u) * 205.2); height: calc(var(--u) * 292.2); }
+  .jr2 .jr2-spread { left: 50%; top: calc(var(--u) * 40.4); width: 50%; height: calc(var(--u) * 558.2); }
 
   @media (max-width: 899px) {
-    .jr2 { --u: calc(100vw / 390); height: calc(var(--u) * 858); }
-    .jr2 .jr2-label { left: calc(var(--u) * 23.8); top: calc(var(--u) * 32.6); gap: calc(var(--u) * 6.3); font-size: calc(var(--u) * 17.5); }
-    .jr2 .jr2-grid   { left: calc(var(--u) * 31);    top: calc(var(--u) * 129.8); width: calc(var(--u) * 175.3); height: calc(var(--u) * 217.8); }
-    .jr2 .jr2-cover  { left: calc(var(--u) * 188.3); top: calc(var(--u) * 132);   width: calc(var(--u) * 174.6); height: calc(var(--u) * 216.4); }
-    .jr2 .jr2-spread { left: calc(var(--u) * 41);    top: calc(var(--u) * 397.6); width: calc(var(--u) * 411.5); height: calc(var(--u) * 383); }
-    .jr2 .jr2-pic:hover img { transform: none; }
+    .jr2 { --u: calc(100vw / 390); height: calc(var(--u) * 859); }
+    .jr2 .jr2-label { left: calc(var(--u) * 23.8); top: calc(var(--u) * 31.6); gap: calc(var(--u) * 5.4); font-size: calc(var(--u) * 18); line-height: 1.02; }
+    .jr2 .jr2-label br { display: inline; }
+    .jr2 .jr2-label .o1 { order: 2; }
+    .jr2 .jr2-label .o2 { order: 1; }
+    .jr2 .jr2-grid   { left: calc(var(--u) * 23.8);  top: calc(var(--u) * 157.1); width: calc(var(--u) * 163.6); height: calc(var(--u) * 226.2); }
+    .jr2 .jr2-cover  { left: calc(var(--u) * 204.8); top: calc(var(--u) * 156);   width: calc(var(--u) * 161.4); height: calc(var(--u) * 230.3); }
+    .jr2 .jr2-spread { left: calc(var(--u) * 23.8);  top: calc(var(--u) * 414.9); width: calc(var(--u) * 433.8); height: calc(var(--u) * 403.6); }
   }
 </style>
 <!-- ЖУРНАЛ «ИСКОУСЪ» · ВТОРОЙ БЛОК: МОДУЛЬНАЯ СЕТКА -->
 <section class="jr2" id="jr2">
   <div class="jr2-label">
-    <span class="g">Модульная сетка:</span>
-    <span>Основной блок</span>
-    <span>обложки</span>
+    <span class="g">Модульная<br> сетка:</span>
+    <span class="o1">Основной блок</span>
+    <span class="o2">обложки</span>
   </div>
-  <div class="jr2-pic jr2-grid"><img src="assets/journal-grid.png" alt="Модульная сетка обложки" width="488" height="606"></div>
-  <div class="jr2-pic jr2-cover"><img src="assets/journal-cover-final.png" alt="Обложка журнала «Искоусъ»" width="484" height="600"></div>
-  <div class="jr2-pic jr2-spread"><img src="assets/journal-spread.jpg" alt="Разворот журнала с модульной сеткой" width="985" height="917"></div>
+  <div class="jr2-pic jr2-grid"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3762-6462-4766-b363-636436363633/-/resize/972x/-/format/webp/1.jpg.webp"><img src="https://static.tildacdn.pub/tila3762-6462-4766-b363-636436363633/1.jpg" alt="Модульная сетка обложки" width="486" height="672"></picture></div>
+  <div class="jr2-pic jr2-cover"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3861-6663-4436-b836-663336323130/-/resize/956x/-/format/webp/2.jpg.webp"><img src="https://static.tildacdn.pub/tila3861-6663-4436-b836-663336323130/2.jpg" alt="Обложка журнала «Искоусъ»" width="478" height="682"></picture></div>
+  <div class="jr2-pic jr2-spread"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3833-3063-4632-b364-353031343639/-/format/webp/3.jpg.webp"><img src="https://static.tildacdn.pub/tila3833-3063-4632-b364-353031343639/3.jpg" alt="Разворот журнала с модульной сеткой" width="1380" height="1284"></picture></div>
 </section>
 
 <style>
