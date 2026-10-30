@@ -346,7 +346,7 @@
     var b = sec.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
     return Math.max(0, Math.min(1, (vh - b.top) / (vh + b.height)));   /* 0 — блок появился снизу, 1 — ушёл вверх */
   }
-  function render() { var amp = window.innerWidth < 900 ? 24 : 46; sq.style.transform = 'translate3d(0,' + ((cur - 0.5) * 2 * amp).toFixed(2) + 'px,0)'; }  /* 0 — когда блок по центру экрана; на телефоне размах меньше */
+  function render() { var amp = window.innerWidth < 900 ? 14 : 46; sq.style.transform = 'translate3d(0,' + ((cur - 0.5) * 2 * amp).toFixed(2) + 'px,0)'; }  /* 0 — когда блок по центру экрана; на телефоне размах меньше */
   function tick() {
     cur += (target - cur) * 0.14;
     if (Math.abs(target - cur) < 0.0004) { cur = target; running = false; render(); return; }
@@ -379,15 +379,15 @@
   .jr5 .s2 { left: calc(var(--u) * 41.4);  top: calc(var(--u) * 497.4); }
 
   @media (max-width: 899px) {
-    .jr5 { --u: calc(100vw / 390); height: calc(var(--u) * 1181); }
-    .jr5 .jr5-pic { left: calc(var(--u) * 12) !important; width: calc(var(--u) * 366); height: calc(var(--u) * 256.7); }
-    .jr5 .p1 { top: calc(var(--u) * 56); }
-    .jr5 .p2 { top: calc(var(--u) * 326.7); }
-    .jr5 .p3 { top: calc(var(--u) * 597.4); }
-    .jr5 .p4 { top: calc(var(--u) * 868.1); }
-    .jr5 .jr5-sq { width: calc(var(--u) * 36); height: calc(var(--u) * 36); }
-    .jr5 .s1 { left: calc(var(--u) * 342); top: calc(var(--u) * 295); }
-    .jr5 .s2 { left: calc(var(--u) * 12);  top: calc(var(--u) * 836); }
+    .jr5 { --u: calc(100vw / 360); height: calc(var(--u) * 319); }
+    .jr5 .jr5-pic { width: calc(var(--u) * 150.2); height: calc(var(--u) * 105.3); }
+    .jr5 .p1 { left: calc(var(--u) * 32.2);  top: calc(var(--u) * 48.6); }
+    .jr5 .p2 { left: calc(var(--u) * 188.5); top: calc(var(--u) * 48.6); }
+    .jr5 .p3 { left: calc(var(--u) * 32.2);  top: calc(var(--u) * 164.5); }
+    .jr5 .p4 { left: calc(var(--u) * 188.5); top: calc(var(--u) * 164.5); }
+    .jr5 .jr5-sq { width: calc(var(--u) * 20); height: calc(var(--u) * 20); }
+    .jr5 .s1 { left: calc(var(--u) * 339); top: calc(var(--u) * 100); }
+    .jr5 .s2 { left: calc(var(--u) * 6);   top: calc(var(--u) * 232); }
   }
 </style>
 <!-- ЖУРНАЛ «ИСКОУСЪ» · ПЯТЫЙ БЛОК: РАЗВОРОТЫ (интервью с художниками) -->
@@ -410,7 +410,7 @@
     return Math.max(0, Math.min(1, (vh - b.top) / (vh + b.height)));   /* 0 — блок появился снизу, 1 — ушёл вверх */
   }
   function render() {
-    var d = (cur - 0.5) * 2, amp = window.innerWidth < 900 ? 24 : 46;  /* d = 0, когда блок по центру экрана */
+    var d = (cur - 0.5) * 2, amp = window.innerWidth < 900 ? 14 : 46;  /* d = 0, когда блок по центру экрана */
     sqs.forEach(function (el, i) { el.style.transform = 'translate3d(0,' + ((i === 0 ? -1 : 1) * d * amp).toFixed(2) + 'px,0)'; });
   }
   function tick() {
