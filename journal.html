@@ -209,11 +209,11 @@
   .jr2 .jr2-spread:hover img { transform: scale(1.04); }
 
   @media (max-width: 899px) {
-    .jr2 { --u: calc(100vw / 390); height: auto; padding: 56px 20px 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 12px; row-gap: 0; }
-    .jr2 .jr2-label { position: static; grid-column: 1 / -1; font-size: clamp(15px, 4.5vw, 22px); gap: 6px; margin-bottom: 28px; }
-    .jr2 .jr2-pic { position: relative; left: auto; top: auto; width: auto; height: auto; }
-    .jr2 .jr2-grid, .jr2 .jr2-cover { aspect-ratio: 488 / 606; }
-    .jr2 .jr2-spread { grid-column: 1 / -1; margin: 40px -20px 0; aspect-ratio: 1182 / 1100; }
+    .jr2 { --u: calc(100vw / 390); height: calc(var(--u) * 858); }
+    .jr2 .jr2-label { left: calc(var(--u) * 23.8); top: calc(var(--u) * 32.6); gap: calc(var(--u) * 6.3); font-size: calc(var(--u) * 17.5); }
+    .jr2 .jr2-grid   { left: calc(var(--u) * 31);    top: calc(var(--u) * 129.8); width: calc(var(--u) * 175.3); height: calc(var(--u) * 217.8); }
+    .jr2 .jr2-cover  { left: calc(var(--u) * 188.3); top: calc(var(--u) * 132);   width: calc(var(--u) * 174.6); height: calc(var(--u) * 216.4); }
+    .jr2 .jr2-spread { left: calc(var(--u) * 41);    top: calc(var(--u) * 397.6); width: calc(var(--u) * 411.5); height: calc(var(--u) * 383); }
     .jr2 .jr2-pic:hover img { transform: none; }
   }
 </style>
