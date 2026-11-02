@@ -357,7 +357,10 @@
     .pk6 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8) calc(var(--u) * 40); }
     /* развёртка по ширине между отступами 23,8, ниже легенда цветов */
     .pk6 .pk6-pic { position: relative; left: auto; top: auto; width: 100%; height: auto; aspect-ratio: 1727 / 902; }
-    .pk6 .pk6-keys { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 24); margin-top: calc(var(--u) * 24); }
+    /* легенда как в пятом блоке: 021C по центру, CMYK у правого края */
+    .pk6 .pk6-keys { display: flex; margin-top: calc(var(--u) * 24); }
+    .pk6 .k1 { margin-left: calc(var(--u) * 138.1); }
+    .pk6 .k2 { margin-left: auto; }
     .pk6 .pk6-key { position: static; font-size: calc(var(--u) * 15); }
     .pk6 .pk6-key svg, .pk6 .pk6-key i { width: calc(var(--u) * 22); height: calc(var(--u) * 22); }
   }
