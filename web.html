@@ -202,13 +202,14 @@
   .wb3 .wb3-phone { left: 7.792%; top: 17.333%; width: 15.261%; height: 55.619%; }
 
   @media (max-width: 899px) {
-    .wb3 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8) calc(var(--u) * 40); }
+    .wb3 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8) 0; }
     .wb3 .wb3-t { position: static; font-size: calc(var(--u) * 15); line-height: 1.1; }
     .wb3 .wb3-name { margin-bottom: calc(var(--u) * 20); }
     .wb3 .wb3-desc { margin-bottom: calc(var(--u) * 24); }
     .wb3 .wb3-ln { display: inline; white-space: normal; }
     .wb3 .wb3-list { gap: calc(var(--u) * 10); }
-    .wb3 .wb3-stage { position: relative; left: auto; top: auto; width: 100%; height: auto; aspect-ratio: 1861 / 1050; margin-top: calc(var(--u) * 28); }
+    /* ноутбук со столом без боковых отступов: стол уходит в края экрана и вниз блока, текст остаётся с отступами 23,8 */
+    .wb3 .wb3-stage { position: relative; left: auto; top: auto; width: calc(100% + var(--u) * 47.6); height: auto; aspect-ratio: 1861 / 1050; margin: calc(var(--u) * 28) calc(var(--u) * -23.8) 0; }
   }
 </style>
 <!-- ВЕБ-ДИЗАЙН · ТРЕТИЙ БЛОК: НАВИГАЦИЯ И МОДУЛЬНАЯ СЕТКА -->
