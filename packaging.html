@@ -212,6 +212,10 @@
   .pk3 .l1 { left: calc(var(--u) * 609); top: calc(var(--u) * 160.8); width: calc(var(--u) * 512.4); height: calc(var(--u) * 227.4); }
   .pk3 .l2 { left: calc(var(--u) * 609); top: calc(var(--u) * 405); width: calc(var(--u) * 512.4); height: calc(var(--u) * 229.2); }
 
+  /* у файлов этикеток по краю идёт светлая линия 1 px: чуть увеличиваем картинку и скрываем лишние 6 px справа и снизу */
+  .pk3 .l1, .pk3 .l2 { overflow: hidden; }
+  .pk3 .l1 img, .pk3 .l2 img { width: calc(100% * 1026 / 1020); height: auto; max-width: none; }
+
   @media (max-width: 899px) {
     .pk3 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8) calc(var(--u) * 40); display: flex; flex-wrap: wrap; align-content: flex-start; }
     .pk3 .pk3-t { position: static; flex: 0 0 100%; font-size: calc(var(--u) * 15); line-height: 1.1; }
