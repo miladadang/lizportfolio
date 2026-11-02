@@ -174,6 +174,59 @@
   </main>
 </div>
 
+<style>
+  .wb3 {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --grey: #585858;
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 782.4);
+    background: #000; color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  }
+  .wb3 *, .wb3 *::before, .wb3 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .wb3 .wb3-t { position: absolute; font-size: calc(var(--u) * 15); line-height: calc(var(--u) * 13.8); text-align: left; text-transform: none; }
+  .wb3 .wb3-name { left: calc(var(--u) * 81.6); top: calc(var(--u) * 21.2); text-transform: uppercase; }
+  .wb3 .wb3-desc { left: calc(var(--u) * 604.2); top: calc(var(--u) * 21.2); }
+  .wb3 .wb3-ln { display: block; white-space: nowrap; }
+  .wb3 .wb3-list { left: calc(var(--u) * 87.6); top: calc(var(--u) * 152.7); display: flex; flex-direction: column; gap: calc(var(--u) * 7.8); text-transform: uppercase; }
+  .wb3 .wb3-label { color: var(--grey); }
+
+  /* ноутбук со столом и телефон: сцена сохраняет их взаимное расположение, на телефоне уменьшается целиком */
+  .wb3 .wb3-stage { position: absolute; left: calc(var(--u) * 83.4); top: calc(var(--u) * 152.4); width: calc(var(--u) * 1116.6); height: calc(var(--u) * 630); }
+  .wb3 .wb3-stage picture { display: contents; }
+  .wb3 .wb3-stage img { position: absolute; display: block; height: auto; }
+  .wb3 .wb3-laptop { left: 0; top: 0; width: 100%; height: 100%; }
+  .wb3 .wb3-phone { left: 7.792%; top: 17.333%; width: 15.261%; height: 55.619%; }
+
+  @media (max-width: 899px) {
+    .wb3 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8) calc(var(--u) * 40); }
+    .wb3 .wb3-t { position: static; font-size: calc(var(--u) * 15); line-height: 1.1; }
+    .wb3 .wb3-name { margin-bottom: calc(var(--u) * 20); }
+    .wb3 .wb3-desc { margin-bottom: calc(var(--u) * 24); }
+    .wb3 .wb3-ln { display: inline; white-space: normal; }
+    .wb3 .wb3-list { gap: calc(var(--u) * 10); }
+    .wb3 .wb3-stage { position: relative; left: auto; top: auto; width: 100%; height: auto; aspect-ratio: 1861 / 1050; margin-top: calc(var(--u) * 28); }
+  }
+</style>
+<!-- ВЕБ-ДИЗАЙН · ТРЕТИЙ БЛОК: НАВИГАЦИЯ И МОДУЛЬНАЯ СЕТКА -->
+<section class="wb3" id="wb3">
+  <p class="wb3-t wb3-name">Навигация</p>
+  <p class="wb3-t wb3-desc"><span class="wb3-ln">Мне было необходимо переработать типичную структуру сайта-витрины, </span><span class="wb3-ln">чтобы знакомство с&nbsp;новым брендом было удобным и&nbsp;запоминающимся. </span><span class="wb3-ln">В&nbsp;интерфейс сайта я&nbsp;внедрила кликабельные клипы с&nbsp;UGC-креаторами, </span><span class="wb3-ln">которые переводят нас на&nbsp;страницу товара. </span><span class="wb3-ln">В&nbsp;основу каталога сайта вошли удобные карточки товаров с&nbsp;крупными </span><span class="wb3-ln">текстовыми акцентами в&nbsp;виде номера формул с&nbsp;упаковки продуктов</span></p>
+  <div class="wb3-t wb3-list">
+    <span class="wb3-label">Модульная сетка:</span>
+    <span>Мобильная</span>
+    <span>Десктопная</span>
+  </div>
+
+  <div class="wb3-stage">
+    <picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3035-3264-4064-b530-663430373961/-/format/webp/nout.png.webp"><img class="wb3-laptop" src="https://static.tildacdn.pub/tila3035-3264-4064-b530-663430373961/nout.png" alt="Ноутбук на столе: экран с десктопной модульной сеткой — поля до ширины экрана, ширина контента 1280 px, колонки по 85 px и отступы по 24 px" width="1680" height="948"></picture>
+    <picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3431-3764-4037-b735-396265643730/-/resize/676x/-/format/webp/phon.png.webp"><img class="wb3-phone" src="https://static.tildacdn.pub/tila3431-3764-4037-b735-396265643730/phon.png" alt="Телефон с мобильной модульной сеткой: ширина 320 px, колонки по 48 px и отступы по 8 px" width="338" height="695"></picture>
+  </div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
