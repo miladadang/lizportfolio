@@ -609,6 +609,31 @@
   </div>
 </section>
 
+<style>
+  .pk12 {
+    --u: calc(100vw / 1200);
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 375);
+    background: #000;
+  }
+  .pk12 *, .pk12 *::before, .pk12 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .pk12 .pk12-pic { position: absolute; left: calc(var(--u) * 180.6); top: 0; width: calc(var(--u) * 838.5); height: calc(var(--u) * 357); overflow: hidden; }
+  .pk12 .pk12-pic picture { display: contents; }
+  /* у файла последний столбец и нижняя строка пикселей светлые: слегка увеличиваем картинку и скрываем 3 px справа и снизу */
+  .pk12 .pk12-pic img { display: block; width: calc(100% * 1677 / 1674); height: auto; max-width: none; }
+
+  @media (max-width: 899px) {
+    .pk12 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8); }
+    /* развёртка по ширине между отступами 23,8 */
+    .pk12 .pk12-pic { position: relative; left: auto; top: auto; width: 100%; height: auto; aspect-ratio: 1677 / 712; }
+  }
+</style>
+<!-- УПАКОВКА & E-COM · ДВЕНАДЦАТЫЙ БЛОК: КОРОБКА GALOR «БРЕНДИ И ЗАПЕЧЁНАЯ ГРУША» -->
+<section class="pk12" id="pk12">
+  <div class="pk12-pic"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3462-3765-4733-b463-303336613431/-/format/webp/12.jpg.webp"><img src="https://static.tildacdn.pub/tila3462-3765-4733-b463-303336613431/12.jpg" alt="Коробка свечи Galor «Бренди и запечённая груша»: слева лицевая сторона на тёмном фоне, справа развёртка с контуром высечки, контуром банки и текстами" width="1677" height="715"></picture></div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
