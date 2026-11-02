@@ -227,6 +227,38 @@
   </div>
 </section>
 
+<style>
+  .wb4 {
+    --u: calc(100vw / 1200);
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 541.2);
+    background: #000;
+  }
+  .wb4 *, .wb4 *::before, .wb4 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .wb4 .wb4-pic { position: absolute; top: 0; height: calc(var(--u) * 541.2); overflow: hidden; }
+  .wb4 .wb4-pic picture { display: contents; }
+  /* у файлов последний столбец и нижняя строка пикселей светлые: слегка увеличиваем картинку и скрываем 3 px справа и снизу */
+  .wb4 .wb4-pic img { display: block; height: auto; max-width: none; }
+  .wb4 .a { left: 0; width: calc(var(--u) * 602.4); }
+  .wb4 .a img { width: calc(100% * 1206 / 1203); }
+  .wb4 .b { left: calc(var(--u) * 602.4); width: calc(var(--u) * 597.6); }
+  .wb4 .b img { width: calc(100% * 1680 / 1677); }
+
+  @media (max-width: 899px) {
+    .wb4 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8); }
+    /* две картинки друг под другом по ширине между отступами 23,8 */
+    .wb4 .wb4-pic { position: relative; left: auto; top: auto; width: 100%; height: auto; }
+    .wb4 .a { aspect-ratio: 1203 / 1079; }
+    .wb4 .b { aspect-ratio: 1677 / 1517; margin-top: calc(var(--u) * 8); }
+  }
+</style>
+<!-- ВЕБ-ДИЗАЙН · ЧЕТВЁРТЫЙ БЛОК -->
+<section class="wb4" id="wb4">
+  <div class="wb4-pic a"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3831-6531-4131-a666-373566646131/-/format/webp/image_612.jpg.webp"><img src="https://static.tildacdn.pub/tila3831-6531-4131-a666-373566646131/image_612.jpg" alt="Коробка и баночка патчей Recept lab Liposome-Active Eye Patches на светлом фоне" width="1206" height="1082"></picture></div>
+  <div class="wb4-pic b"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3862-6336-4030-a433-646335663965/-/format/webp/__2026-09-23_115309_.jpg.webp"><img src="https://static.tildacdn.pub/tila3862-6336-4030-a433-646335663965/__2026-09-23_115309_.jpg" alt="Цветовая палитра сайта вдохновлена упаковкой: сетка из розово-бежевых оттенков, выделены #000000, #EADAD1 и #EBDEDE" width="1680" height="1520"></picture></div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
