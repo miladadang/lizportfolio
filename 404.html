@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>404 — страница не найдена</title>
+<style>html, body { margin: 0; background: #000; }</style>
+</head>
+<body>
+<!-- =====================================================
+     СТРАНИЦА 404  ·  блок T123 «HTML-код»  (Тильда: Настройки сайта → «Страница 404»)
+     В цифре «404» вместо нуля — жёлтый квадрат из портфолио. Без скриптов и анимации текста
+     Ссылки: / (главная), /web, /packaging, /journal — замените на адреса ваших страниц
+     ===================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400&display=swap" rel="stylesheet">
+<style>
+  .e404 {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --grey: #585858;
+    box-sizing: border-box; position: relative; overflow: hidden;
+    min-height: max(100svh, calc(var(--u) * 560));
+    display: flex; align-items: center; justify-content: center;
+    background: #000; color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  }
+  .e404 *, .e404 *::before, .e404 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* еле заметная модульная сетка на фоне: колонки 85 px, отступы 24 px, как в проекте */
+  .e404::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
+    width: calc(var(--u) * 1066); transform: translateX(-50%);
+    background: repeating-linear-gradient(90deg, #0d0d0d 0 calc(var(--u) * 85), transparent calc(var(--u) * 85) calc(var(--u) * 109));
+    pointer-events: none;
+  }
+
+  .e404 .e404-label {
+    position: absolute; left: calc(var(--u) * 84); top: calc(var(--u) * 40);
+    font-size: calc(var(--u) * 15); line-height: 1; letter-spacing: .02em; text-transform: uppercase; color: var(--grey);
+  }
+  .e404 .e404-in { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: calc(var(--u) * 80) 0; }
+
+  .e404 .e404-num { display: flex; align-items: flex-end; justify-content: center; font-size: calc(var(--u) * 300); line-height: .8; letter-spacing: -.02em; }
+  .e404 .e404-sq { flex: none; display: block; width: calc(var(--u) * 212); height: calc(var(--u) * 212); margin: 0 calc(var(--u) * 20) calc(var(--u) * 5); background: #f4ff7b; }
+
+  .e404 .e404-title { margin-top: calc(var(--u) * 44); font-size: calc(var(--u) * 36); line-height: 1; letter-spacing: .02em; text-transform: uppercase; }
+  .e404 .e404-text { margin-top: calc(var(--u) * 18); font-size: calc(var(--u) * 15); line-height: calc(var(--u) * 21); color: #bdbdbd; }
+
+  .e404 .e404-nav { margin-top: calc(var(--u) * 40); display: flex; flex-wrap: wrap; justify-content: center; gap: calc(var(--u) * 14) calc(var(--u) * 48); list-style: none; }
+  .e404 .e404-nav a {
+    position: relative; display: block; color: #fff; text-decoration: none; white-space: nowrap;
+    font-size: calc(var(--u) * 15); line-height: 1; letter-spacing: .02em; text-transform: uppercase;
+  }
+  .e404 .e404-nav a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px; background: #fff;
+    transform: scaleX(0); transform-origin: right center;
+    transition: transform .5s cubic-bezier(.19,1,.22,1);
+  }
+  .e404 .e404-nav a:hover::after, .e404 .e404-nav a:focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+
+  @media (max-width: 899px) {
+    .e404 { --u: calc(100vw / 390); min-height: 100svh; padding: calc(var(--u) * 88) calc(var(--u) * 23.8) calc(var(--u) * 56); }
+    .e404::before { width: calc(var(--u) * 342.4); background: repeating-linear-gradient(90deg, #0d0d0d 0 calc(var(--u) * 48), transparent calc(var(--u) * 48) calc(var(--u) * 56)); }
+    .e404 .e404-label { left: calc(var(--u) * 23.8); top: calc(var(--u) * 40); font-size: calc(var(--u) * 15); }
+    .e404 .e404-in { padding: 0; }
+    .e404 .e404-num { font-size: calc(var(--u) * 120); }
+    .e404 .e404-sq { width: calc(var(--u) * 85); height: calc(var(--u) * 85); margin: 0 calc(var(--u) * 8) calc(var(--u) * 2); }
+    .e404 .e404-title { margin-top: calc(var(--u) * 32); font-size: calc(var(--u) * 28); }
+    .e404 .e404-text { margin-top: calc(var(--u) * 16); font-size: calc(var(--u) * 15); line-height: 1.25; }
+    .e404 .e404-nav { margin-top: calc(var(--u) * 32); flex-direction: column; align-items: center; gap: calc(var(--u) * 18); }
+    .e404 .e404-nav a { font-size: calc(var(--u) * 16); }
+  }
+</style>
+<!-- СТРАНИЦА 404 -->
+<section class="e404" id="e404">
+  <p class="e404-label">Ошибка 404</p>
+  <div class="e404-in">
+    <div class="e404-num" role="img" aria-label="404"><span>4</span><i class="e404-sq"></i><span>4</span></div>
+    <h1 class="e404-title">Страница не найдена</h1>
+    <p class="e404-text">Возможно, ссылка устарела или страница&nbsp;ещё на&nbsp;подготовке.<br>Начните с&nbsp;главной или выберите проект:</p>
+    <ul class="e404-nav">
+      <li><a href="main.html">обо мне</a></li>
+      <li><a href="web.html">веб-дизайн</a></li>
+      <li><a href="packaging.html">упаковка &amp; e-com</a></li>
+      <li><a href="journal.html">журнал</a></li>
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>
