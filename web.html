@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Веб-дизайн Recept Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: #000; }
+  .jr {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --grey: #585858;
+    position: relative;
+    background: #000;
+    color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+  .jr *, .jr *::before, .jr *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ---------- menu: fixed to the top, same as the home page ---------- */
+  .jr .jr-menu {
+    position: fixed; z-index: 20; left: 0; top: 0; width: 100%;
+    height: max(32px, calc(var(--u) * 34.26));
+    background: url("assets/menu-gradient.png") center / 100% 100% no-repeat;
+  }
+  .jr .jr-menu-d {
+    list-style: none; display: flex; justify-content: space-between;
+    padding: max(10px, calc(var(--u) * 12)) max(16px, calc(var(--u) * 85.65)) 0;
+  }
+  .jr .jr-menu-d a {
+    position: relative; display: block; color: #fff; text-decoration: none; white-space: nowrap;
+    font: 400 max(10px, calc(var(--u) * 12))/max(10px, calc(var(--u) * 12)) var(--jr-font);
+    letter-spacing: .02em; text-transform: uppercase;
+  }
+  .jr .jr-menu-d a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: #fff;
+    transform: scaleX(0); transform-origin: right center;
+    transition: transform .5s cubic-bezier(.19,1,.22,1);
+  }
+  .jr .jr-menu-d a:hover::after, .jr .jr-menu-d a:focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+  .jr .jr-menu-m, .jr .jr-drawer, .jr .jr-backdrop { display: none; }
+
+  /* ---------- packaging block: 1200 x 583 ---------- */
+  .jr .jr-block {
+    display: grid;
+    grid-template-columns: 1fr calc(var(--u) * 591.6);   /* фото в натуральной пропорции 1183 × 1166 на всю высоту блока */
+    min-height: calc(var(--u) * 583.2);
+    background: #000;
+  }
+  .jr .jr-info {
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: calc(var(--u) * 30);
+    padding: calc(var(--u) * 60) calc(var(--u) * 100);
+    text-align: center;
+  }
+  .jr .jr-info > * { width: 100%; }
+  .jr .jr-title {
+    font-weight: 400; font-size: calc(var(--u) * 38.5); line-height: .935;
+    letter-spacing: .02em; text-transform: uppercase;
+  }
+  .jr .jr-title span { display: block; }
+  .jr .jr-text { font-size: calc(var(--u) * 14); line-height: 1; }
+  .jr .jr-list { display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 5); text-transform: uppercase; }
+  .jr .jr-label { color: var(--grey); text-transform: uppercase; letter-spacing: .02em; }
+  .jr .jr-about { display: flex; flex-direction: column; gap: calc(var(--u) * 6); }
+  .jr .jr-about .jr-body { display: flex; flex-direction: column; gap: calc(var(--u) * 5.2); }
+  .jr .jr-ln { display: block; white-space: nowrap; }
+  .jr .jr-mb { display: inline; }
+
+  /* photo: grows smoothly inside its frame on hover */
+  .jr .jr-photo { position: relative; overflow: hidden; background: #b30f2a; }
+  .jr .jr-photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 1.6s cubic-bezier(.19,1,.22,1);
+    will-change: transform;
+  }
+  .jr .jr-photo:hover img { transform: scale(1.06); }
+
+  /* ---------- tablet / mobile ---------- */
+  @media (max-width: 899px) {
+    .jr { --u: calc(100vw / 390); }
+    .jr .jr-menu { height: 44px; background: url("assets/menu-gradient.png") center / 100% 100% no-repeat; }
+    .jr .jr-menu-d { display: none; }
+    .jr .jr-menu-m { display: flex; justify-content: space-between; align-items: flex-start; padding: 15px 16px 0; }
+    .jr .jr-menu-m a, .jr .jr-toggle {
+      appearance: none; background: none; border: 0; cursor: pointer; color: #fff; text-decoration: none;
+      font: 400 14px/14px var(--jr-font); letter-spacing: .02em; text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .jr .jr-backdrop { display: block; position: fixed; inset: 0; z-index: 17; visibility: hidden; }
+    .jr.is-open .jr-backdrop { visibility: visible; }
+    .jr .jr-drawer {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 22px;
+      position: fixed; z-index: 18; top: 0; right: 0; width: 50vw; height: 100svh;
+      padding: 64px 16px 24px; background: #000; text-align: right;
+      transform: translateX(100%); visibility: hidden;
+      transition: transform .5s cubic-bezier(.19,1,.22,1), visibility 0s linear .5s;
+    }
+    .jr.is-open .jr-drawer { transform: none; visibility: visible; transition-delay: 0s; }
+    .jr .jr-proj {
+      color: #fff; text-decoration: none; font: 400 14px/16px var(--jr-font); letter-spacing: .02em; text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .jr .jr-proj.is-on { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+
+    .jr .jr-block { grid-template-columns: 1fr; min-height: 0; }
+    .jr .jr-photo { order: -1; aspect-ratio: 689 / 892; }
+    .jr .jr-photo img { object-position: 8% 50%; }
+    .jr .jr-photo:hover img { transform: none; }
+    .jr .jr-info { padding: 56px 20px 72px; gap: 32px; }
+    .jr .jr-title { font-size: clamp(32px, 11vw, 54px); }
+    .jr .jr-text { font-size: clamp(15px, 4.5vw, 22px); line-height: 1.02; }
+    .jr .jr-list { gap: 6px; }
+    .jr .jr-about { gap: 10px; }
+    .jr .jr-about .jr-body { gap: 18px; }
+    .jr .jr-ln { white-space: normal; }
+    .jr .jr-mb { display: block; }
+    .jr .jr-nb { display: none; }
+    .jr .jr-body p .jr-ln { display: inline; }
+  }
+</style>
+</head>
+<body>
+<!-- ВЕБ-ДИЗАЙН · ПЕРВЫЙ БЛОК: RECEPT LAB -->
+<div class="jr" id="jr">
+  <nav class="jr-menu" aria-label="Главное меню">
+    <ul class="jr-menu-d">
+      <li><a href="main.html">обо мне</a></li>
+      <li><a href="web.html">веб-дизайн</a></li>
+      <li><a href="packaging.html">упаковка &amp; e-com</a></li>
+      <li><a href="journal.html">журнал</a></li>
+    </ul>
+    <div class="jr-menu-m">
+      <a href="main.html">обо мне</a>
+      <button type="button" class="jr-toggle" id="jrToggle" aria-expanded="false" aria-controls="jrDrawer">проекты</button>
+    </div>
+  </nav>
+  <div class="jr-backdrop" id="jrBackdrop"></div>
+  <aside class="jr-drawer" id="jrDrawer" aria-label="Проекты" aria-hidden="true">
+    <a href="web.html" class="jr-proj is-on">веб-дизайн</a>
+    <a href="packaging.html" class="jr-proj">упаковка &amp; e-com</a>
+    <a href="journal.html" class="jr-proj">журнал</a>
+  </aside>
+
+  <main class="jr-block">
+    <section class="jr-info">
+      <h1 class="jr-title"><span>Веб-дизайн</span><span>Recept lab</span></h1>
+
+      <div class="jr-text jr-list">
+        <span class="jr-label">Что сделала:</span>
+        <span>структуру сайта</span>
+        <span>визуальные <br class="jr-nb">элементы</span>
+        <span>навигацию</span>
+      </div>
+
+      <div class="jr-text jr-about">
+        <span class="jr-label">о проекте:</span>
+        <div class="jr-body">
+          <p><span class="jr-ln">Recept lab&nbsp;— бренд уходовой косметики, миссия </span><span class="jr-ln">которого&nbsp;— доказать, что эффективно, может и&nbsp;должно </span><span class="jr-ln">быть эстетично</span></p>
+          <p><span class="jr-ln">Передо мной стояла задача создать такую визуальную </span><span class="jr-ln">коммуникацию, которая отражала бы ценности бренда </span><span class="jr-ln">и&nbsp;усиливало его позиционирование, как современный </span><span class="jr-ln">стильный бренд</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="jr-photo" aria-label="Веб-дизайн Recept Lab">
+      <img src="assets/web-photo.jpg" alt="Ноутбук с главной страницей сайта Recept lab: девушка с розовыми патчами под глазами, баночка патчей и кнопка «Подробнее»" width="1183" height="1166">
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
+      drawer = document.getElementById('jrDrawer'), back = document.getElementById('jrBackdrop');
+  if (!toggle) return;
+  function setOpen(v) {
+    root.classList.toggle('is-open', v);
+    toggle.setAttribute('aria-expanded', v ? 'true' : 'false');
+    drawer.setAttribute('aria-hidden', v ? 'false' : 'true');
+  }
+  toggle.addEventListener('click', function () { setOpen(!root.classList.contains('is-open')); });
+  back.addEventListener('click', function () { setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  var projs = Array.prototype.slice.call(drawer.querySelectorAll('.jr-proj'));
+  projs.forEach(function (a) {
+    a.addEventListener('click', function () {
+      projs.forEach(function (x) { x.classList.remove('is-on'); });
+      a.classList.add('is-on');
+      setTimeout(function () { setOpen(false); }, 380);
+    });
+  });
+})();
+</script>
+</body>
+</html>
