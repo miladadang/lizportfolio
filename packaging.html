@@ -450,6 +450,55 @@
   </div>
 </section>
 
+<style>
+  .pk8 {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 493.8);
+    background: #000; color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  }
+  .pk8 *, .pk8 *::before, .pk8 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .pk8 .pk8-pic { position: absolute; left: calc(var(--u) * 169.8); top: calc(var(--u) * 8.4); width: calc(var(--u) * 860.4); height: calc(var(--u) * 429.2); }
+  .pk8 .pk8-pic picture { display: contents; }
+  .pk8 .pk8-pic img { display: block; width: 100%; height: 100%; }
+
+  .pk8 .pk8-key {
+    position: absolute; top: calc(var(--u) * 459);
+    display: flex; align-items: center; gap: calc(var(--u) * 6);
+    font-size: calc(var(--u) * 15); line-height: calc(var(--u) * 21.6); white-space: nowrap;
+  }
+  .pk8 .pk8-key svg, .pk8 .pk8-key i { flex: none; display: block; width: calc(var(--u) * 21.6); height: calc(var(--u) * 21.6); }
+  .pk8 .pk8-key i { border-radius: 50%; background: #882633; }
+  .pk8 .k1 { left: calc(var(--u) * 890.4); }
+  .pk8 .k2 { left: calc(var(--u) * 963.6); }
+
+  @media (max-width: 899px) {
+    .pk8 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8) calc(var(--u) * 40); }
+    /* развёртка по ширине между отступами 23,8, ниже легенда цветов */
+    .pk8 .pk8-pic { position: relative; left: auto; top: auto; width: 100%; height: auto; aspect-ratio: 1680 / 838; }
+    /* легенда как в пятом блоке: 202C по центру, CMYK у правого края */
+    .pk8 .pk8-keys { display: flex; margin-top: calc(var(--u) * 24); }
+    .pk8 .k1 { margin-left: calc(var(--u) * 138.1); }
+    .pk8 .k2 { margin-left: auto; }
+    .pk8 .pk8-key { position: static; font-size: calc(var(--u) * 15); }
+    .pk8 .pk8-key svg, .pk8 .pk8-key i { width: calc(var(--u) * 22); height: calc(var(--u) * 22); }
+  }
+  @media (min-width: 900px) { .pk8 .pk8-keys { display: contents; } }
+</style>
+<!-- УПАКОВКА & E-COM · ВОСЬМОЙ БЛОК: РАЗВЁРТКА-ПОДСКАЗКА «X» (ЗЕЛЁНАЯ) -->
+<section class="pk8" id="pk8">
+  <div class="pk8-pic"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3937-6436-4239-a436-633631306334/-/format/webp/8.png.webp"><img src="https://static.tildacdn.pub/tila3937-6436-4239-a436-633631306334/8.png" alt="Две развёртки подсказки в форме X: слева зелёная с четырьмя шагами — капни, проведи, капни, подуй — и шагом «смешай» в центре, справа бордовая обратная сторона с маркировкой" width="1680" height="838"></picture></div>
+
+  <div class="pk8-keys" aria-label="Цвета печати">
+    <div class="pk8-key k1"><i aria-hidden="true"></i><span>202C</span></div>
+    <div class="pk8-key k2"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 11 L3.22 3.22 A11 11 0 0 1 18.78 3.22 Z" fill="#f9ed39"/><path d="M11 11 L18.78 3.22 A11 11 0 0 1 18.78 18.78 Z" fill="#101b17"/><path d="M11 11 L18.78 18.78 A11 11 0 0 1 3.22 18.78 Z" fill="#12a1db"/><path d="M11 11 L3.22 18.78 A11 11 0 0 1 3.22 3.22 Z" fill="#e8148d"/></svg><span>CMYK</span></div>
+  </div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
