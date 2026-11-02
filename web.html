@@ -259,6 +259,55 @@
   <div class="wb4-pic b"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3862-6336-4030-a433-646335663965/-/format/webp/__2026-09-23_115309_.jpg.webp"><img src="https://static.tildacdn.pub/tila3862-6336-4030-a433-646335663965/__2026-09-23_115309_.jpg" alt="Цветовая палитра сайта вдохновлена упаковкой: сетка из розово-бежевых оттенков, выделены #000000, #EADAD1 и #EBDEDE" width="1680" height="1520"></picture></div>
 </section>
 
+<style>
+  .wb5 {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --grey: #585858;
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 987.6);
+    background: #000; color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  }
+  .wb5 *, .wb5 *::before, .wb5 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .wb5 .wb5-list {
+    position: absolute; left: calc(var(--u) * 84); top: calc(var(--u) * 38);
+    display: flex; flex-direction: column; gap: calc(var(--u) * 7.5);
+    font-size: calc(var(--u) * 15); line-height: calc(var(--u) * 13.8); text-transform: uppercase; text-align: left;
+  }
+  .wb5 .wb5-label { color: var(--grey); }
+
+  .wb5 .wb5-pic { position: absolute; top: calc(var(--u) * 39.6); overflow: hidden; }
+  .wb5 .wb5-pic picture { display: contents; }
+  .wb5 .wb5-pic img { display: block; width: 100%; height: auto; max-width: none; }
+  .wb5 .a { left: calc(var(--u) * 259.2); width: calc(var(--u) * 434); height: calc(var(--u) * 903); }
+  .wb5 .b { left: calc(var(--u) * 714); top: calc(var(--u) * 38.4); width: calc(var(--u) * 401.5); height: calc(var(--u) * 630.5); }
+  /* у второго файла последний столбец и нижняя строка пикселей светлые: слегка увеличиваем картинку и скрываем 3 px справа и снизу */
+  .wb5 .b img { width: calc(100% * 803 / 800); }
+
+  @media (max-width: 899px) {
+    .wb5 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8) calc(var(--u) * 40); display: flex; flex-wrap: wrap; align-items: flex-start; }
+    .wb5 .wb5-list { position: static; flex: 0 0 100%; gap: calc(var(--u) * 10); font-size: calc(var(--u) * 15); line-height: 1.1; margin-bottom: calc(var(--u) * 28); }
+    /* две страницы сайта в одну строку одинаковой высоты, вместе по ширине между отступами 23,8 */
+    .wb5 .wb5-pic { position: relative; top: auto; left: auto; height: auto; }
+    .wb5 .a { width: calc(var(--u) * 143.9); aspect-ratio: 868 / 1806; }
+    .wb5 .b { width: calc(var(--u) * 190.5); margin-left: calc(var(--u) * 8); aspect-ratio: 800 / 1258; }
+  }
+</style>
+<!-- ВЕБ-ДИЗАЙН · ПЯТЫЙ БЛОК: СТРАНИЦЫ САЙТА -->
+<section class="wb5" id="wb5">
+  <div class="wb5-list">
+    <span class="wb5-label">Страницы:</span>
+    <span>Главная</span>
+    <span>О бренде</span>
+  </div>
+
+  <div class="wb5-pic a"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila6631-6130-4163-b038-326639383765/-/format/webp/Frame_676.jpg.webp"><img src="https://static.tildacdn.pub/tila6631-6130-4163-b038-326639383765/Frame_676.jpg" alt="Главная страница сайта Recept lab: баннер с патчами, слайдер с карточками, блок «Бестселлеры» с товарами" width="868" height="1806"></picture></div>
+  <div class="wb5-pic b"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila6465-3238-4437-a366-303732666239/-/format/webp/image_762.jpg.webp"><img src="https://static.tildacdn.pub/tila6465-3238-4437-a366-303732666239/image_762.jpg" alt="Страница «О бренде» сайта Recept lab: «Мы создаём уход без компромиссов», три фото-карточки, собственное производство и стандарт ISO, футер" width="803" height="1261"></picture></div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
