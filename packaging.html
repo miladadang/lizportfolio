@@ -376,6 +376,80 @@
   </div>
 </section>
 
+<style>
+  .pk7 {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --grey: #585858;
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 573.6);
+    background: #000; color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  }
+  .pk7 *, .pk7 *::before, .pk7 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .pk7 .pk7-text {
+    position: absolute; left: calc(var(--u) * 83.7); top: calc(var(--u) * 19);
+    display: flex; flex-direction: column; gap: calc(var(--u) * 7.8);
+    font-size: calc(var(--u) * 15); line-height: calc(var(--u) * 13.8); text-transform: uppercase; text-align: left;
+  }
+  .pk7 .pk7-label { color: var(--grey); }
+  .pk7 .pk7-text > span:nth-child(3) { margin-top: calc(var(--u) * 2.4); }
+
+  .pk7 .pk7-pic { position: absolute; }
+  .pk7 .pk7-pic picture { display: contents; }
+  .pk7 .pk7-pic img { display: block; width: 100%; height: 100%; }
+  .pk7 .box { left: calc(var(--u) * 252.6); top: calc(var(--u) * 74.4); width: calc(var(--u) * 187); height: calc(var(--u) * 434); }
+  .pk7 .die { left: calc(var(--u) * 457.2); top: calc(var(--u) * 18);   width: calc(var(--u) * 571.5); height: calc(var(--u) * 491); }
+
+  .pk7 .pk7-key {
+    position: absolute; top: calc(var(--u) * 520.8);
+    display: flex; align-items: center; gap: calc(var(--u) * 6);
+    font-size: calc(var(--u) * 14.3); line-height: calc(var(--u) * 21.6); white-space: nowrap;
+  }
+  .pk7 .pk7-key svg, .pk7 .pk7-key i { flex: none; display: block; width: calc(var(--u) * 21.6); height: calc(var(--u) * 21.6); }
+  .pk7 .pk7-key i { border-radius: 50%; }
+  .pk7 .k1 { left: calc(var(--u) * 816.6); }
+  .pk7 .k1 { gap: calc(var(--u) * 2); }   /* в макете подпись 3435C стоит почти вплотную к кругу */
+  .pk7 .k1 i { background: #0d4633; }
+  .pk7 .k2 { left: calc(var(--u) * 888.6); }
+  .pk7 .k2 i { background: #faaf5c; }
+  .pk7 .k3 { left: calc(var(--u) * 961.8); }
+
+  @media (max-width: 899px) {
+    .pk7 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8) calc(var(--u) * 40); display: flex; flex-wrap: wrap; align-items: flex-start; }
+    .pk7 .pk7-text { position: static; flex: 0 0 100%; gap: calc(var(--u) * 10); font-size: calc(var(--u) * 15); line-height: 1.1; }
+    .pk7 .pk7-br { display: none; }
+    .pk7 .pk7-text > span:nth-child(3) { margin-top: 0; }
+    /* коробка и развёртка в одну строку: одинаковая высота, вместе ровно по ширине между отступами 23,8; ниже легенда цветов */
+    .pk7 .pk7-pic { position: relative; left: auto; top: auto; height: auto; }
+    .pk7 .box { width: calc(var(--u) * 90.3); margin: calc(var(--u) * 28) 0 0; aspect-ratio: 374 / 868; }
+    .pk7 .die { width: calc(var(--u) * 244.1); margin: calc(var(--u) * 28) 0 0 calc(var(--u) * 8); aspect-ratio: 1143 / 982; }
+    .pk7 .pk7-keys { flex: 0 0 100%; display: flex; flex-wrap: wrap; justify-content: space-between; gap: calc(var(--u) * 12); margin-top: calc(var(--u) * 24); }
+    .pk7 .pk7-key { position: static; font-size: calc(var(--u) * 15); }
+    .pk7 .pk7-key svg, .pk7 .pk7-key i { width: calc(var(--u) * 22); height: calc(var(--u) * 22); }
+  }
+  @media (min-width: 900px) { .pk7 .pk7-keys { display: contents; } }
+</style>
+<!-- УПАКОВКА & E-COM · СЕДЬМОЙ БЛОК: POTION OF TOUCH -->
+<section class="pk7" id="pk7">
+  <div class="pk7-text">
+    <span class="pk7-label">Potion of touch</span>
+    <span>Вкус: яблоко <br class="pk7-br">и&nbsp;мятный цитрус</span>
+    <span>Эффект: <br class="pk7-br">охлаждающий</span>
+  </div>
+
+  <div class="pk7-pic box"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3338-6239-4335-b531-356363303065/-/resize/748x/-/format/webp/7.png.webp"><img src="https://static.tildacdn.pub/tila3338-6239-4335-b531-356363303065/7.png" alt="Коробка Potion of touch: тёмно-зелёный картон, золотая фольга, каплевидное окно, внизу бордовая вставка" width="374" height="868"></picture></div>
+  <div class="pk7-pic die"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3133-3931-4139-a665-663162363239/-/format/webp/8.png.webp"><img src="https://static.tildacdn.pub/tila3133-3931-4139-a665-663162363239/8.png" alt="Развёртка коробки Potion of touch: тёмно-зелёный картон с золотым тиснением, сердечко, капля, снежинка, состав и способ применения" width="1143" height="982"></picture></div>
+
+  <div class="pk7-keys" aria-label="Цвета печати">
+    <div class="pk7-key k1"><i aria-hidden="true"></i><span>3435C</span></div>
+    <div class="pk7-key k2"><i aria-hidden="true"></i><span>105C</span></div>
+    <div class="pk7-key k3"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 11 L3.22 3.22 A11 11 0 0 1 18.78 3.22 Z" fill="#f9ed39"/><path d="M11 11 L18.78 3.22 A11 11 0 0 1 18.78 18.78 Z" fill="#101b17"/><path d="M11 11 L18.78 18.78 A11 11 0 0 1 3.22 18.78 Z" fill="#12a1db"/><path d="M11 11 L3.22 18.78 A11 11 0 0 1 3.22 3.22 Z" fill="#e8148d"/></svg><span>CMYK</span></div>
+  </div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
