@@ -559,6 +559,56 @@
   <div class="pk10-pic p3"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila3561-3434-4761-b031-356137653234/-/format/webp/3.jpg.webp"><img src="https://static.tildacdn.pub/tila3561-3434-4761-b031-356137653234/3.jpg" alt="Задняя сторона коробки Galor «Дубовый мох и амбра» с контуром банки и составом" width="800" height="976"></picture></div>
 </section>
 
+<style>
+  .pk11 {
+    --u: calc(100vw / 1200);
+    --jr-font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    position: relative; overflow: hidden;
+    height: calc(var(--u) * 421.8);
+    background: #000; color: #fff;
+    font-family: var(--jr-font);
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
+  }
+  .pk11 *, .pk11 *::before, .pk11 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .pk11 .pk11-pic { position: absolute; left: calc(var(--u) * 184.8); top: calc(var(--u) * 15.6); width: calc(var(--u) * 830); height: calc(var(--u) * 353.4); overflow: hidden; }
+  .pk11 .pk11-pic picture { display: contents; }
+  /* у файла последний столбец и нижняя строка пикселей светлые: слегка увеличиваем картинку и скрываем 3 px справа и снизу */
+  .pk11 .pk11-pic img { display: block; width: calc(100% * 1660 / 1657); height: auto; max-width: none; }
+
+  .pk11 .pk11-key {
+    position: absolute; top: calc(var(--u) * 382);
+    display: flex; align-items: center; gap: calc(var(--u) * 5);
+    font-size: calc(var(--u) * 14.2); line-height: calc(var(--u) * 19.5); white-space: nowrap;
+  }
+  .pk11 .pk11-key svg, .pk11 .pk11-key i { flex: none; display: block; width: calc(var(--u) * 19.5); height: calc(var(--u) * 19.5); }
+  .pk11 .pk11-key i { border-radius: 50%; background: #232420; }
+  .pk11 .k1 { left: calc(var(--u) * 867); }
+  .pk11 .k2 { left: calc(var(--u) * 955.2); }
+
+  @media (max-width: 899px) {
+    .pk11 { --u: calc(100vw / 390); height: auto; padding: calc(var(--u) * 40) calc(var(--u) * 23.8) calc(var(--u) * 40); }
+    /* развёртка по ширине между отступами 23,8, ниже легенда цветов */
+    .pk11 .pk11-pic { position: relative; left: auto; top: auto; width: 100%; height: auto; aspect-ratio: 1660 / 705; }
+    /* легенда как в шестом блоке: BLACK C по центру, CMYK у правого края */
+    .pk11 .pk11-keys { display: flex; margin-top: calc(var(--u) * 24); }
+    .pk11 .k1 { margin-left: calc(var(--u) * 138.1); }
+    .pk11 .k2 { margin-left: auto; }
+    .pk11 .pk11-key { position: static; font-size: calc(var(--u) * 15); }
+    .pk11 .pk11-key svg, .pk11 .pk11-key i { width: calc(var(--u) * 22); height: calc(var(--u) * 22); }
+  }
+  @media (min-width: 900px) { .pk11 .pk11-keys { display: contents; } }
+</style>
+<!-- УПАКОВКА & E-COM · ОДИННАДЦАТЫЙ БЛОК: КОРОБКА GALOR -->
+<section class="pk11" id="pk11">
+  <div class="pk11-pic"><picture><source type="image/webp" srcset="https://optim.tildacdn.pub/tila6566-3363-4564-b933-393962353166/-/format/webp/11.jpg.webp"><img src="https://static.tildacdn.pub/tila6566-3363-4564-b933-393962353166/11.jpg" alt="Коробка свечи Galor «Дубовый мох и амбра»: слева лицевая сторона на тёмном фоне, справа развёртка с контуром высечки, контуром банки и текстами" width="1660" height="708"></picture></div>
+
+  <div class="pk11-keys" aria-label="Цвета печати">
+    <div class="pk11-key k1"><i aria-hidden="true"></i><span>BLACK C</span></div>
+    <div class="pk11-key k2"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 11 L3.22 3.22 A11 11 0 0 1 18.78 3.22 Z" fill="#f9ed39"/><path d="M11 11 L18.78 3.22 A11 11 0 0 1 18.78 18.78 Z" fill="#101b17"/><path d="M11 11 L18.78 18.78 A11 11 0 0 1 3.22 18.78 Z" fill="#12a1db"/><path d="M11 11 L3.22 18.78 A11 11 0 0 1 3.22 3.22 Z" fill="#e8148d"/></svg><span>CMYK</span></div>
+  </div>
+</section>
+
 <script>
 (function () {
   var root = document.getElementById('jr'), toggle = document.getElementById('jrToggle'),
